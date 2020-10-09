@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        input[type='submit']{color: blueviolet}
+    </style>
+</head>
+<body>
+    <p>添加用户:</p>
+    <form action="http://localhost:3000/register">
+        填写用户名：<input type="text" name="name"><br><br>
+        填 写 密 码：<input type="text" name="pwd"><br><br>
+        填 写 姓 名：<input type="text" name="tnm"><br><br>
+        填 写 年 级：<input type="text" name="grd"><br><br>
+        填 写 专 业：<input type="text" name="mjor"><br><br>
+        <input type="submit" value="添加学生用户">
+    </form>
+    <p>删除用户:</p>
+    <form action="http://localhost:3000/delete">
+        填写用户名：<input type="text" name="name">
+        <input type="submit" value="删除学生用户">
+    </form>
+</body>
+</html>

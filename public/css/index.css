@@ -1,0 +1,165 @@
+*{
+    margin:0;
+    padding:0;
+    border:0;
+    text-decoration:none;
+    font-family:segoe script,楷体 , serif;
+}
+ol, ul {
+	list-style: none;
+}
+body{
+    background-image: url(../images/indexStudent.png);
+     background-size: 100%;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    overflow:auto;
+    /* opacity:0.2; */
+    
+}
+
+
+
+
+/* 顶部 */
+.title{
+    font-family:"宋体";
+    font-size: 40px;
+    color:white;
+    /* font:40px "宋体"； */
+}
+.nav{
+    position: fixed;
+    top: 0;
+    border-radius:0 0px 30px 0; 
+    list-style: none;
+    background-color: rgba(69, 223, 120, 0.8);
+    width:200px;
+    /* overflow:hidden; */
+    float:left;
+}
+
+.nav a{
+
+    text-decoration: none;
+    color:white;
+    display:block;
+    text-align: center;
+    /* padding:5px 0; */
+    font-weight: bold;
+}
+.nav li{
+    height:70px;
+    font:24px/70px "楷体";
+}
+.li1,.li2,.li3{
+    border-bottom: 2px  #bbb solid;
+}
+.nav li:hover{
+    background-color:  rgba(49, 203, 100, 1);
+}
+
+
+
+/* 内容区 */
+/* .content{} */
+.table {
+    width:900px;
+    /* border:6px rgba(53, 138, 81, 0.4) solid; */
+    /* box-shadow: 0px 0px 20px rgba(53, 138, 81, 1); */
+    box-shadow: 0px 0px 30px #303030; 
+    border-radius: 35px 35px 0 0;
+    margin-top:90px ;
+    margin-bottom:200px;
+    margin-left:410px;
+    border-collapse: collapse;
+    font-size: 24px;
+    background-color: rgba(244,244,244,0.4);
+}
+.table th{
+    font-size: 30px;
+    font-weight: bold;
+    height:70px;
+    line-height: 70px;
+    
+    /* box-shadow: 0 0 0 1px #ededed; */
+
+    /* border-bottom:4px  #717651 solid; */
+    /* background-color:  rgba(69, 223, 120, 0.8); */
+}
+/* .th{
+    background-color:  rgba(69, 223, 120, 0.8);
+    border-radius: 35px 35px 0 0;
+} */
+
+td{
+    border:2px #919671 solid; 
+    text-align: center;
+}
+.th2,.th3,.th4{
+    border-left:2px rgba(71, 71, 70, 0.5) solid;
+}
+tr:nth-child(even){
+    background-color:  rgba(235,235,190,0.5);}
+tr:not(.th):hover {
+    background-color: rgba(255,255,100,0.4);
+}
+
+
+
+
+
+
+
+
+
+
+/* 底部 */
+.bottom{
+    /* float:right; */
+    height:50px;
+    width:100%;
+    text-align: center;
+    /* border:10px red solid; */
+    position: fixed;
+    bottom: 0px;
+    overflow:hidden;
+    margin-top:68px;
+    background-color: black;
+    opacity:0.5;
+    font:16px/50px "楷体";
+    
+  
+}
+/* .loginfooter:after{
+    content:"";
+    display:block;
+    clear:both;
+    
+    
+} */
+
+ul{
+    text-align: center;
+    text-decoration:none;
+    /* position:absolute; */
+    /* margin-top:auto; */
+    /* top:220px; */
+    color:white;
+  
+    
+    /* bottom:200px; */
+    /* border:1px red solid; */
+}
+.ul1 li{
+    float:left;
+    text-align: center;
+    margin-left:20px;
+    
+}
+.lastli{
+    /* float:right; */
+    /* margin-left:70px; */
+    padding-left:600px;
+    /* background-color: azure; */
+}

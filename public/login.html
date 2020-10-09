@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        input[type='submit'],a{
+            color: goldenrod;
+        }
+    </style>
+</head>
+<body>
+    <h2>请登录</h2>
+    <form action="http://localhost:3000/login">
+        用户名：<input type="text" name="name"><br><br>
+        密&nbsp; &nbsp;&nbsp;码：<input type="password" name="pwd"><br><br>
+        <input type="submit" value="管理员登录">
+    </form>
+    <form action="http://localhost:3000/stulogin">
+        用户名：<input type="text" name="name"><br><br>
+        密&nbsp; &nbsp;&nbsp;码：<input type="password" name="pwd"><br><br>
+        <input type="submit" value="学生登录">
+    </form>
+    <form action="http://localhost:3000/tclogin">
+        用户名：<input type="text" name="name"><br><br>
+        密&nbsp; &nbsp;&nbsp;码：<input type="password" name="pwd"><br><br>
+        <input type="submit" value="教师登录">
+    </form>
+    
+</body>
+</html>

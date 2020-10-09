@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="description" content="作业上传下载平台管理员界面">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="images/logo2.png"  type="image/x-icon">
+        <title>管理员 新添</title>
+        <!-- <link rel="stylesheet" href="css/login.css"> -->
+        <link rel="stylesheet" href="css/administratorAdd.css">
+        <!-- <link rel="stylesheet" href="css/reset.css"> -->
+
+        <script src="/lib/vue-2.4.0.js"></script>
+        <script src="/lib/vue-resource.js"></script>
+        <!-- <link rel="stylesheet" href=""> -->
+        <script src="vue.min.js"></script>
+        <script src="vue-router.min.js"></script>
+        <script type="text/javascript" src="js/administratorAdd.js"></script>
+        <style type="text/css">
+            
+
+        </style>
+       
+    </head>
+    <body>
+        <div id="app">
+        <!-- 导航条 -->
+            <div class="top"> 
+                <ul class="nav">
+                    <li><a href="administratorAdd.html" target="_self">新添</a></li>
+                    <li class="center"><a href="administratorDelete.html" target="_self">删除</a></li>
+                    <li><a href="administratorSearch.html" target="_self">查询</a></li>
+                </ul>
+
+            </div>
+            <!-- input -->
+            <div class="content">
+                <div class="form3">
+                    <div class="form1" onsubmit="return CheckInput();">
+                        <button  type="button" name="user" value="teacher" class="yhfl first btn01" @click="btn01click()" >教师</button><button type="button" name="#" value="#" class="yhfl last btn02" @click="btn02click()">学生</button>
+                        
+                    </div>
+
+                         <!-- {{ok}};      -->
+                     <form action="http://localhost:3000/register">
+                        
+
+
+                        <!-- ok为true时 -->
+                        <div v-if="ok" class="form2" name="form2">
+                            <div class="username" >
+                                <label for="username" >用户名</label>
+                                <input id="username" type="text" name="name" />
+                            </div>
+                            <div class="password">
+                                <label for="password">密&nbsp;&nbsp;码</label>
+                                <input id="password" type="password" name="pwd"/>
+                            </div>
+                            <div class="truename">
+                                <label for="truename" >姓&nbsp;&nbsp;名</label>
+                                <input id="truename" type="text" name="tnm" />
+                            </div>
+                            <div class="xy">
+                                <label for="xy" >学&nbsp;&nbsp;院</label>
+                                <input id="xy" type="text" name="school" />
+                            </div>
+                            <div class="zc">
+                                <label for="zc" >职&nbsp;&nbsp;称</label>
+                                <input id="zc" type="text" name="prot" />
+                            </div>
+                            <button class="button submit" type="submit" name="user" value="teacher" >添加教师</button>
+                           
+                            
+                        </div>
+
+
+                        <!-- ok为false时 -->
+                        <div v-else class="form2" >
+                            <div class="username">
+                                <label for="username" >用户名</label>
+                                <input  type="text" name="name" />
+                            </div>
+                            <div class="password">
+                                <label for="password">密&nbsp;&nbsp;码</label>
+                                <input  type="password" name="pwd"/>
+                            </div>
+                            <div class="truename">
+                                <label for="truename" >姓&nbsp;&nbsp;名</label>
+                                <input type="text" name="tnm" />
+                            </div>
+                            <div class="grade">
+                                <label for="grade" >年&nbsp;&nbsp;级</label>
+                                <input id="grade" type="text" name="grd" />
+                            </div>
+                            <div class="zhuanye">
+                                <label for="zhuanye" >专&nbsp;&nbsp;业</label>
+                                <input id="zhuanye" type="text" name="mjor" />
+                            </div>
+                            <!-- <div id="hidden" display=none >
+                                <input type="text" name="user" value="student"/> 
+                            </div> -->
+                            <button id="button" name="user" value="student" class="button submit" type="submit" onclick="alert('请求发送成功')">添加学生</button>
+
+                        </div>
+                
+                    </form>
+                </div>
+
+            </div>
+            <div class="loginfooter">
+                <div class="ul1">
+                    <ul>
+                        <li>版权所有：熊子洵小组</li><li>|</li>
+                        <li>客服邮箱：2350869684@qq.com</li><li>|</li>
+                        <li>客服电话：19825066321</li>
+                        <li class="lastli">当前版本：1.00</li>
+
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+        <script>
+            window.onload=function(){
+            var name=document.getElementById("username");
+            var form2=document.getElementsByClassName("form2");
+            var password=document.getElementById("password");
+            var btn01=document.getElementsByClassName("btn01")[0];
+            var btn02=document.getElementsByClassName("btn02")[0];
+            // var btn03=document.getElementsByClassName("submit")[0];
+            // var btn=document.getElementById("button");
+            // function CheckInput(){
+            //         if(!username.value){
+            //             alert("请输入用户名");
+            //             username.value.focus();
+            //             return false;
+            //         }
+
+
+            // }
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                ok:true,
+            },
+            methods:{
+                btn01click(){
+                    // alert(btn01.parentNode.innerHTML);
+                    vm.ok=true;
+                    // alert(btn01.style[0]);
+                    btn01.style.cssText="background-color:red;";
+                    // alert(btn01.style[0]);
+
+
+                },
+                btn02click(){
+                    vm.ok=false;
+                    // btn02.parentNode.style.backgroundColor="red";
+                    btn01.style.backgroundColor="#000";
+                },
+                btnsclick(){
+                    
+                    if(!username.value){
+                        alert("请输入用户名");
+                        username.value.focus();
+                        return false;
+                    }
+                    // if(!password.value){
+                    //     alert("请输入密码");
+                    //     pwd.value.focus();
+                    //     return false;
+                    // }
+                    form2.method='Post';
+                    form2.action="#";
+                    form2.submit();btn.submit();
+                },
+                CheckInput(){
+                    if(!username.value){
+                        alert("请输入用户名");
+                        username.value.focus();
+                        return false;
+                    }
+
+
+                }
+
+            }
+            }) ;
+        }
+        </script>
+    </body>
+</html>

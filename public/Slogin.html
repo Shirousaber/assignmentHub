@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="作业上传下载平台">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="/images/logo2.png"  type="image/x-icon">
+        <title>作业上传下载平台</title>
+        <link rel="stylesheet" href="/css/login.css">
+        <!-- <link rel="stylesheet" href=""> -->
+        <script src="vue.min.js"></script>
+        <script src="vue-router.min.js"></script>
+        
+    </head>
+    <body>
+        <div class="logintop">
+            <div class="title" >作业上传下载平台</div>
+            <div class="title1">U & D Platform</div>
+        </div>
+        <div class="logincontent">
+            <div class="form3">
+                <div class="form1">
+                    <button type="button"  class="yhfl first"><a href="Tlogin.html" >教师</a></button><button type="button" class="yhfl"><a href="Slogin.html">学生</a></button><button type="button" class="yhfl last"><a href="Alogin.html">管理员</a></button>
+                    <!-- <a href="Tlogin.html" class="yhfl first">教师</a><a href="Slogin.html" class="yhfl">学生</a><a href="Alogin.html" value="#" class="yhfl last">管理员</a> -->
+                </div>
+                <form action="/stulogin">
+                    
+                    <div class="form2">
+                        <div class="username">
+                            <label for="username" >用户名</label>
+                            <input id="username" type="text" name="name" />
+                        </div>
+                        <div class="password">
+                            <label for="password">密&nbsp;&nbsp;码</label>
+                            <input id="password" type="password" name="pwd"/>
+                        </div>
+                        <button name="user" value="student" class="button submit"type="submit">学生登录</button>
+                    </div>
+            
+                </form>
+            </div>
+            
+            
+        </div>
+        <div class="loginfooter">
+            <div class="ul1">
+                <ul>
+                    <li>版权所有：熊子洵小组</li><li>|</li>
+                    <li>客服邮箱：2350869684@qq.com</li><li>|</li>
+                    <li>客服电话：19825066321</li>
+                    <li class="lastli">当前版本：1.00</li>
+
+                </ul>
+            </div>
+            
+        </div>
+
+
+
+
+        <div id="app">
+
+        </div>
+
+        <script>
+            var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{}
+            }) ;
+        </script>
+    </body>
+</html>

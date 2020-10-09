@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="作业上传下载平台管理员界面">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="images/logo2.png"  type="image/x-icon">
+        <title>管理员 新添</title>
+        <!-- <link rel="stylesheet" href="css/login.css"> -->
+        <link rel="stylesheet" href="css/administratorDS.css">
+        <!-- <link rel="stylesheet" href="css/reset.css"> -->
+
+        <script src="lib/vue-2.4.0.js"></script>
+        <script src="lib/vue-resource.js"></script>
+        <!-- <link rel="stylesheet" href=""> -->
+        <script src="vue.min.js"></script>
+        <script src="vue-router.min.js"></script>
+       
+    </head>
+    <body>
+        <div id="app">
+        <!-- 导航条 -->
+        <div class="top"> 
+            <ul class="nav">
+                <li><a href="administratorAdd.html" target="_self">新添</a></li>
+                <li class="center"><a href="administratorDelete.html" target="_self">删除</a></li>
+                <li><a href="administratorSearch.html" target="_self">查询</a></li>
+            </ul>
+<!-- {{ok}}; -->
+        </div>
+        <!-- input -->
+        <div class="content">
+            <div class="form3">
+                <form action="http://localhost:3000/delete">
+                    <div class="form1">
+                        <button class="yhfl first" type="button" @click="btn01()">教师</button><button type="button" name="#" value="#" class="yhfl last" @click="btn02()">学生</button>
+                    </div>
+                    <div class="form2">
+                        <div class="username">
+                            <label for="username" >用户名</label>
+                            <input id="username" type="text" name="name" />
+                        </div>
+                        <!-- <div class="password">
+                            <label for="password">密&nbsp;&nbsp;码</label>
+                            <input id="password" type="password" />
+                        </div> -->
+                        <button v-if="ok" name="user" value="teacher" class="button submit"type="submit">删除教师</button>
+                        <button v-else name="user" value="student" class="button submit"type="submit">删除学生</button>
+                    </div>
+            
+                </form>
+            </div>
+
+        </div>
+        <div class="loginfooter">
+            <div class="ul1">
+                <ul>
+                    <li>版权所有：熊子洵小组</li><li>|</li>
+                    <li>客服邮箱：2350869684@qq.com</li><li>|</li>
+                    <li>客服电话：19825066321</li>
+                    <li class="lastli">当前版本：1.00</li>
+
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+
+
+
+        <div id="app">
+
+        </div>
+
+        <script>
+            var btn01=document.getElementsByClassName("first");
+            var btn02=document.getElementsByClassName("last");
+            var vm = new Vue({
+            el:'#app',
+            data:{
+                ok:true,
+            },
+            methods:{
+                btn01(){
+                    vm.ok=true;
+
+                },
+                btn02(){
+                    vm.ok=false;
+                }
+
+            }
+            }) ;
+        </script>
+    </body>
+</html>

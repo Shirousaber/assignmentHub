@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <meta name="description" content="作业上传下载平台学生界面">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="/images/logo2.png"  type="image/x-icon">
+		<title>作业上传下载平台</title>
+		<title><%= title %></title>
+        <link rel="stylesheet" href="/css/index.css">
+        <!-- <link rel="stylesheet" href=""> -->
+        <script src="vue.min.js"></script>
+        <script src="vue-router.min.js"></script>
+        
+    </head>
+  
+  <body>
+	  <!-- 顶部 -->
+	<div class="top">
+		<!-- <div class="title">我的课程</div> -->
+
+
+		<!-- 导航条 -->
+		<div class="nav">
+			<ul class="nav">
+				<li class="li1"><a href="#">个人中心</a></li>
+				<li class="li2"><a href="#">未提交</a></li>
+				<li class="li3"><a href="#">已提交</a></li>
+				<li class="li4"><a href="#">加入班级</a></li>
+			</ul>
+
+		</div>
+
+	</div>
+
+	<!-- 内容区 -->
+	<div class="content">
+		<table class="table table-bordered text-center">
+			<tr class="th">
+				<th class="th1">学号</th>
+				<th class="th2">教师工号</th>
+				<th class="th3">课程</th>
+				<th class="th4">作业号</th>
+			</tr>
+			<% for(var i=0;i<data.length;i++){ %>
+			<tr>
+				<td><%= data[i].sid %></td>
+				<td><%= data[i].tid %></td>
+				<td><%= data[i].cname %></td>
+				<!-- <td>杀杀杀</td> -->
+				<td><a href='/connect/dload?id=<%=data[i].hid%>&stu=<%=data[i].sid%>' onclick="alert('请求发送成功')"><%= data[i].hid %></a></td>
+			</tr>
+			<% } %>
+			</table>
+
+	</div>
+
+	<!-- 底部 -->
+	<div class="bottom">
+		<div class="ul1">
+			<ul>
+				<li>版权所有：熊子洵小组</li><li>|</li>
+				<li>客服邮箱：2350869684@qq.com</li><li>|</li>
+				<li>客服电话：19825066321</li>
+				<li class="lastli">当前版本：1.00</li>
+
+			</ul>
+		</div>
+
+	</div>
+
+
+    
+    
+  </body>
+</html>
