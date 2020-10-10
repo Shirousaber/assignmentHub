@@ -89,7 +89,7 @@ router.get('/dload',(req, res)=>{
             if(err) {res.send('没有这样的文件');}else{
                 console.log('文件下载成功')
                 stream.once('close', function() {  client.end(); });
-                stream.pipe(fs.createWriteStream(curuser+'_'+id+'_copy.zip'));
+                stream.pipe(fs.createWriteStream('D:/下载/'+curuser+'_'+id+'_copy.zip'));
             }
             
         });
