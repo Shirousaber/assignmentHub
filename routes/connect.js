@@ -6,7 +6,7 @@ const client = new ftp();
 const fs = require('fs');
 
 var ftpTarget ={
-    host: "10.200.46.113",
+    host: "139.224.221.116",
     port: "21"
 };
 
