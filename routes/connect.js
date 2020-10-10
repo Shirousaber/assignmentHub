@@ -85,12 +85,9 @@ router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.stu;
     client.on('ready',function(err){
-        client.get('/pub/'+id+'/'+ curuser+'.zip',function(err, stream){
-            if(err) {res.send('没有这样的文件');}else{
+        client.get('/pub/'+id+'/'+ curuser+'.zip',function(req, res){
                 console.log('文件下载成功')
-                stream.download('D:/上传/'+curuser+'_'+id+'.zip');
-            }
-            
+                res.download('D:/下载/'+curuser+'_'+id+'.zip');
         });
     })
     client.connect(ftpTarget);
