@@ -114,7 +114,7 @@ router.get('/tclogin',function(req,res){
             var config = {
                 host     : 'localhost',     //本机地址
                 user     : 'root',          //用户
-                password : '123456',        //密码
+                password : 'xzx-996Fb',        //密码
                 port: '3306',               
                 database: 'test'            
               };
