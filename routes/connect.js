@@ -85,12 +85,11 @@ router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.stu;
     client.on('ready',function(err){
+        client.on('ready',function(err){
         client.get('/pub/'+id+'/'+ curuser+'.zip',function(err, stream){
             if(err) {res.send('没有这样的文件');}else{
                 stream.once('close', function() {  client.end(); });
-                router.get("/", function(req, res){
-                    res.download('D:/下载/'+curuser+'_'+id+'.zip');
-                });
+                stream.pipe(fs.createWriteStream('D:/下载/'+curuser+'_'+id+'_copy.zip'));
             }
             
         });
