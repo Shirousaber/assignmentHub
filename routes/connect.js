@@ -88,7 +88,7 @@ router.get('/dload',(req, res)=>{
         client.get('/pub/'+id+'/'+ curuser+'.zip',function(err, stream){
             if(err) {res.send('没有这样的文件');}else{
                 console.log('文件下载成功')
-                stream.pipe(fs.createWriteStream('D:/'+curuser+'_'+id+'_copy.zip'));
+                stream.download('D:/上传/'+curuser+'_'+id+'.zip');
             }
             
         });
