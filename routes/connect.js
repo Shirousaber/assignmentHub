@@ -7,9 +7,7 @@ const fs = require('fs');
 
 var ftpTarget ={
     host: "139.224.221.116",
-    port: "21",
-    user:"ftp",
-    password:""
+    port: "21"
 };
 
 //用于实现ftp服务器的链接
