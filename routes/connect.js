@@ -7,7 +7,7 @@ const fs = require('fs');
 
 var ftpTarget ={
     host: "139.224.221.116",
-    port: "20",
+    port: "21",
     user:"ftp",
     password:""
 };
