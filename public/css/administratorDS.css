@@ -14,7 +14,7 @@ ol, ul {
 
 body{
     background-image: url(../images/administrator.jpg);
-    background-size: 100%;
+    background-size: cover;
     background-repeat:no-repeat;
     background-attachment: fixed;
     overflow:auto;
