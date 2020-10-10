@@ -14,6 +14,8 @@ var ftpTarget ={
 
 //用于实现ftp服务器的链接
 
+//用于实现ftp服务器的链接
+
 router.get('/',(req, res)=>{
     res.send('This is the page for uploading and downloading files!');
     
@@ -66,11 +68,11 @@ router.get('/upload',(req, res)=>{
     // }
     
         client.on('ready', function(){
-            client.put('D:/上传/'+curuser+'_'+id+'.zip','/pub/'+id+'/'+ curuser+'.zip',function(err){
+            client.put('D:/下载/'+curuser+'_'+id+'.zip','/pub/'+id+'/'+ curuser+'.zip',function(err){
                 if(err){
                     res.send('ftp异常！');
                 }else{
-                    console.log('文件上传成功');
+                    console.log('文件上传成功')
                     console.log(new Date());
                     client.end();
                 } 
@@ -85,10 +87,8 @@ router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.stu;
     client.on('ready',function(err){
-        client.on('ready',function(err){
         client.get('/pub/'+id+'/'+ curuser+'.zip',function(err, stream){
             if(err) {res.send('没有这样的文件');}else{
-                console.log('文件下载成功');
                 stream.once('close', function() {  client.end(); });
                 stream.pipe(fs.createWriteStream('D:/下载/'+curuser+'_'+id+'_copy.zip'));
             }
@@ -122,3 +122,4 @@ router.get('/dload',(req, res)=>{
 })
 
 module.exports=router;
+
