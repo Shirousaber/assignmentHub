@@ -90,7 +90,7 @@ router.get('/dload',(req, res)=>{
         client.get('/pub/'+id+'/'+ curuser+'.zip',function(err, stream){
             if(err) {res.send('没有这样的文件');}else{
                 stream.once('close', function() {  client.end(); });
-                stream.pipe(fs.createWriteStream('D:/下载/'+curuser+'_'+id+'_copy.zip'));
+                stream.pipe(fs.createWriteStream(curuser+'_'+id+'_copy.zip'));
             }
             
         });
