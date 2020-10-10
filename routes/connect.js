@@ -88,7 +88,7 @@ router.get('/dload',(req, res)=>{
         client.get('/pub/'+id+'/'+ curuser+'.zip',function(err, stream){
             if(err) {res.send('没有这样的文件');}else{
                 stream.once('close', function() {  client.end(); });
-                router.get("/xxx", function(req, res){
+                router.get("/", function(req, res){
                     res.download('D:/下载/'+curuser+'_'+id+'.zip');
                 });
             }
