@@ -66,7 +66,7 @@ router.get('/upload',(req, res)=>{
     // }
     
         client.on('ready', function(){
-            client.put('D:/下载/'+curuser+'_'+id+'.zip','/'+id+'/'+ curuser+'.zip',function(err){
+            client.put('D:/下载/'+curuser+'_'+id+'.zip','/pub/'+id+'/'+ curuser+'.zip',function(err){
                 if(err){
                     res.send('ftp异常！');
                 }else{
