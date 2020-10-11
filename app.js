@@ -3,9 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var bodyParser = require('body-parser');
 var multer  = require('multer');
-app.use(multer({ dest: '/tmp/'}).array('file'));
+
 
 
 
@@ -37,7 +37,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multer({ dest: '/tmp/'}).array('file'));
 
 app.use('/',loginRouter);
 app.use('/index', indexRouter);
@@ -62,5 +63,26 @@ app.use(function(err, req, res, next) {
 });
 
 
+router.post('/connect/file_upload', function (req, res) {
+ 
+   console.log(req.files[0]);  // 上传的文件信息
+ 
+   var des_file = __dirname + "/" + req.files[0].originalname; //文件名
+   fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
+        fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
+         if( err ){
+              console.log( err );
+         }else{
+               // 文件上传成功，respones给客户端
+               response = {
+                   message:'File uploaded successfully', 
+                   filename:req.files[0].originalname
+              };
+          }
+          console.log( response );
+          res.end( JSON.stringify( response ) );
+       });
+   });
+})
 
 module.exports = app;
