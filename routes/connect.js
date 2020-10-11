@@ -149,7 +149,8 @@ router.get('/dload',(req, res)=>{
 router.post('/file_upload', function (req, res) {
  
    console.log(req.files[0]);  // 上传的文件信息
-   var des_file = __dirname + "/" + req.files[0].originalname; //文件名
+   var tempfilename = req.files[0].originalname;
+   var des_file ="/var/ftp/pub" + req.files[0].originalname; //文件名
    fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
         fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
          if( err ){
