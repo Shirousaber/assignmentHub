@@ -85,7 +85,7 @@ router.get('/upload',(req, res)=>{
     // }
     
         client.on('ready', function(){
-            client.put(curuser+'_'+id+'.txt','/pub/'+id+'/'+ curuser+'.txt',function(err){
+            client.put('D:/上传/'+curuser+'_'+id+'.txt','/pub/'+id+'/'+ curuser+'.txt',function(err){
                 if(err){
                     res.send('ftp异常！');
                 }else{
