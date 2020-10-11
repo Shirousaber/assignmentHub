@@ -146,32 +146,18 @@ router.get('/dload',(req, res)=>{
     
 })
 
-var upload = multer({ dest: '/tmp/' })
-router.post('/file_upload', upload.single('file'), function(req, res, next) {
 
-    console.log(req.files[0]);  // 上传的文件信息
-    
-    if(undefined == req.files[0]){
-        res.json(['failed', {msg:"没有选择要上传的文件！"}]);
-        return -1;
-    }
-
-    var des_file = "./file/" + req.files[0].originalname;
-    fs.readFile( req.files[0].path, function (err, data) {
-        fs.writeFile(des_file, data, function (err) {
-            if( err ){
-                console.log( err );
-                res.json(['failed', {msg:err}]);
-            }else{
-                response = {
-                    msg:'File uploaded successfully', 
-                    filename:req.files[0].originalname,
-                };
-                console.log( response );
-                res.json(['success', response]);
-            }
-        });
-    });
+router.post('/file_upload', async (ctx, next) => {
+  // 上传单个文件
+  const file = ctx.request.files.file; // 获取上传文件
+  // 创建可读流
+  const reader = fs.createReadStream(file.path);
+  let filePath = path.join(__dirname, 'public/upload/') + `/${file.name}`;
+  // 创建可写流
+  const upStream = fs.createWriteStream(filePath);
+  // 可读流通过管道写入可写流
+  reader.pipe(upStream);
+  return ctx.body = "上传成功！";
 });
 
 module.exports=router;
