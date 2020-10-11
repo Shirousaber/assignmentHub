@@ -5,6 +5,7 @@ const path = require('path');
 //const client = new ftp();
 const fs = require('fs');
 const multer = require('multer');
+const koaBody = require('koa-body');
 
 var ftpTarget ={
     host: "localhost",
