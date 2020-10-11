@@ -85,7 +85,7 @@ router.get('/upload',(req, res)=>{
     //     });
     // }
     //新宝岛上传
-    fs.readFile( 'D:/上传/'+curuser+'_'+id+'.txt', function (err, data) {
+    fs.readFile( 'http://'+req.headers.host+'/D:/上传/'+curuser+'_'+id+'.txt', function (err, data) {
 		fs.writeFile('/var/ftp/pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt', data, function (err) {
 			console.log(data)
 			if( err ){
@@ -147,7 +147,7 @@ router.get('/dload',(req, res)=>{
 })
 
 var upload = multer({ dest: '/tmp/' })
-router.post('/file_upload', upload.array('file'), function(req, res, next) {
+router.post('/file_upload', upload.single('file'), function(req, res, next) {
 
     console.log(req.files[0]);  // 上传的文件信息
     
