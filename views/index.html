@@ -48,7 +48,9 @@
 				<td><%= data[i].tid %></td>
 				<td><%= data[i].cname %></td>
 				<!-- <td>杀杀杀</td> -->
-				<td><a href='/connect/upload?id=<%=data[i].hid%>&user=<%=user%>'><%= data[i].hid %></a></td>
+				<td>
+					<a href='/connect/upload?id=<%=data[i].hid%>&user=<%=user%>'><%= data[i].hid %></a>
+				</td>
 			</tr>
 			<% } %>
 			</table>
