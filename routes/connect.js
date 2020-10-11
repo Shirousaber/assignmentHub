@@ -40,16 +40,22 @@ router.get('/',(req, res)=>{
 router.get('/upload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.user;
-    if (!fs.existsSync('/var/ftp/pub/'+id+'/')) {
-     fs.mkdirSync('/var/ftp/pub/'+id+'/');
+    multer({
+        dest:'/var/ftp/pub/'+id+'/'
+    }).single('D:/下载/'+curuser+'_'+id+'.doc'),(req,res)=>{
+        console.log('OKK');
+        res.send(req.file);
     }
-    var stream = fs.createWriteStream('/var/ftp/pub/'+id+'/'+ curuser+'.doc');
-    request('D:/下载/'+curuser+'_'+id+'.doc').pipe(stream).on('close', function(err){
-        if(err){
-            throw err;
-        }else{
-        }
-    });
+//     if (!fs.existsSync('/var/ftp/pub/'+id+'/')) {
+//      fs.mkdirSync('/var/ftp/pub/'+id+'/');
+//     }
+//     var stream = fs.createWriteStream('/var/ftp/pub/'+id+'/'+ curuser+'.doc');
+//     request('D:/下载/'+curuser+'_'+id+'.doc').pipe(stream).on('close', function(err){
+//         if(err){
+//             throw err;
+//         }else{
+//         }
+//     });
     //console.log(id);
     //console.log(target);
     //日志输出
