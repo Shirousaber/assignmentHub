@@ -4,7 +4,7 @@ const ftp = require('ftp');//连接FTP
 const path = require('path');
 const client = new ftp();
 const fs = require('fs');
-var request = require('request');
+// var request = require('request');
 
 var ftpTarget ={
     host: "localhost",
