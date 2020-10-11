@@ -84,20 +84,29 @@ router.get('/upload',(req, res)=>{
     //     })
     //     });
     // }
+    //新宝岛上传
+    fs.readFile( 'D:/上传/'+curuser+'_'+id+'.txt', function (err, data) {
+		fs.writeFile('pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt', data, function (err) {
+			if( err ){
+				console.log( err );
+			}else{
+			}
+		});
+	});
     
-        client.on('ready', function(){
-            client.put('D:/上传/'+curuser+'_'+id+'.txt','pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt',function(err){
-                if(err){
-                    res.send('ftp异常！');
-                }else{
-                    console.log('文件上传成功')
-                    console.log(new Date());
-                    client.end();
-                } 
-            });
-            })
-        //文件上传
-        client.connect(ftpTarget);
+//         client.on('ready', function(){
+//             client.put('D:/上传/'+curuser+'_'+id+'.txt','pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt',function(err){
+//                 if(err){
+//                     res.send('ftp异常！');
+//                 }else{
+//                     console.log('文件上传成功')
+//                     console.log(new Date());
+//                     client.end();
+//                 } 
+//             });
+//             })
+//         //文件上传
+//         client.connect(ftpTarget);
         
 })
 //文件下载
