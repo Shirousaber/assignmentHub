@@ -63,7 +63,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-router.post('/connect/file_upload', function (req, res) {
+app.post('/file_upload', function (req, res) {
  
    console.log(req.files[0]);  // 上传的文件信息
  
