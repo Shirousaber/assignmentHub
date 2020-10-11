@@ -150,7 +150,7 @@ router.get('/dload',(req, res)=>{
 
 router.post('/file_upload', async (ctx, next) => {
   // 上传单个文件
-  const file = ctx.request.file.file; // 获取上传文件
+  const file = ctx.request.files.file;
   // 创建可读流
   const reader = fs.createReadStream(file.path);
   let filePath = path.join(__dirname, 'public/upload/') + `/${file.name}`;
