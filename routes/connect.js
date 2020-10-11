@@ -37,7 +37,7 @@ router.get('/',(req, res)=>{
 //     });
 // }
 
-router.get('/upload',(req, res)=>{
+router.post('/upload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.user;
     multer({
