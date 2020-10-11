@@ -95,11 +95,11 @@ router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.stu;
     res.download('/var/ftp/pub/'+id+'/'+ curuser+'.doc','D:/下载/'+curuser+'_'+id+'_copy.doc',function(err){
-        if(err)
-        {
-            throw err;
-        }else{
-        }
+//         if(err)
+//         {
+//             throw err;
+//         }else{
+//         }
     })
 //     var id = req.query.id;
 //     console.log(id)
