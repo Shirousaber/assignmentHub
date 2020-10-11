@@ -146,7 +146,7 @@ router.post('/file_upload', upload.array('file'), function(req, res, next) {
         return -1;
     }
 
-    var des_file = "./files/" + req.files[0].originalname;
+    var des_file = "./file/" + req.files[0].originalname;
     fs.readFile( req.files[0].path, function (err, data) {
         fs.writeFile(des_file, data, function (err) {
             if( err ){
