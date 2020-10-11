@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const ftp = require('ftp');//连接FTP
 const path = require('path');
-const client = new ftp();
+//const client = new ftp();
 const fs = require('fs');
 const multer = require('multer');
 
@@ -40,6 +40,7 @@ router.get('/',(req, res)=>{
 router.get('/upload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.user;
+    const client = new ftp();
 //     multer({
 //         dest:'/var/ftp/pub/'+id+'/'
 //     }).single('D:/下载/'+curuser+'_'+id+'.doc'),(req,res)=>{
