@@ -68,7 +68,7 @@ router.get('/upload',(req, res)=>{
     // }
     
         client.on('ready', function(){
-            client.put('D:/下载/'+curuser+'_'+id+'.zip','/pub/'+id+'/'+ curuser+'.zip',function(err){
+            client.put('D:/下载/'+curuser+'_'+id+'.doc','/pub/'+id+'/'+ curuser+'.doc',function(err){
                 if(err){
                     res.send('ftp异常！');
                 }else{
@@ -86,7 +86,7 @@ router.get('/upload',(req, res)=>{
 router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.stu;
-    res.download('/var/ftp/pub/'+id+'/'+ curuser+'.zip','D:/下载/'+curuser+'_'+id+'_copy.zip',function(err){
+    res.download('/var/ftp/pub/'+id+'/'+ curuser+'.doc','D:/下载/'+curuser+'_'+id+'_copy.doc',function(err){
         if(err)
         {
             throw err;
