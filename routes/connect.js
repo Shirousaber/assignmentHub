@@ -137,7 +137,7 @@ router.get('/dload',(req, res)=>{
 })
 
 var upload = multer({ dest: '/tmp/' })
-router.post('/file_upload', upload.array('image'), function(req, res, next) {
+router.post('/file_upload', upload.array('file'), function(req, res, next) {
 
     console.log(req.files[0]);  // 上传的文件信息
     
