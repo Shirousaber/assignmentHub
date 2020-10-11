@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var multer  = require('multer');
+app.use(multer({ dest: '/tmp/'}).array('file'));
 
 
 
