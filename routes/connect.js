@@ -156,7 +156,7 @@ router.post('/file_upload', function (req, res) {
    var myla = myid.split(".")[1];
    console.log(mysid);
    console.log(myid);
-   var des_file ="/var/ftp/pub/" +myid+"/"+mysid+"."+myla; //文件名
+   var des_file ="/var/ftp/pub/" +myid+"/"+mysid+".zip"; //文件名
    console.log(des_file);
    fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
         fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
