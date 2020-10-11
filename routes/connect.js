@@ -152,6 +152,7 @@ router.post('/file_upload', function (req, res) {
    var tempfilename = req.files[0].originalname;
    var mysid = tempfilename.split("_")[0];
    var myid = tempfilename.split("_")[1];
+   var myid = myid.split(".")[1]
    console.log(mysid);
    console.log(myid);
    var des_file ="/var/ftp/pub/" + req.files[0].originalname; //文件名
