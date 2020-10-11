@@ -63,11 +63,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.post('/connect/file_upload', function (req, res) {
- 
-   console.log(req.files[0].path);  // 上传的文件信息
- 
-   
-})
+
 
 module.exports = app;
