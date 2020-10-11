@@ -148,18 +148,25 @@ router.get('/dload',(req, res)=>{
 })
 
 
-router.post('/file_upload', async (ctx, next) => {
-  // 上传单个文件
-  const file = ctx.request.files.file;
-  // 创建可读流
-  const reader = fs.createReadStream(file.path);
-  let filePath = path.join(__dirname, 'public/upload/') + `/${file.name}`;
-  // 创建可写流
-  const upStream = fs.createWriteStream(filePath);
-  // 可读流通过管道写入可写流
-  reader.pipe(upStream);
-  return ctx.body = "上传成功！";
-});
+router.post('/file_upload',function(req, res){
+	var des_file = __dirname + "/" + req.files[0].originalname;
+	fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
+        fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
+         if( err ){
+              console.log( err );
+         }else{
+               // 文件上传成功，respones给客户端
+               response = {
+                   message:'File uploaded successfully', 
+                   filename:req.files[0].originalname
+              };
+          }
+          console.log( response );
+          res.end( JSON.stringify( response ) );
+       });
+   });
+}
+);
 
 module.exports=router;
 
