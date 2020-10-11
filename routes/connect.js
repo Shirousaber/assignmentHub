@@ -146,7 +146,7 @@ router.get('/dload',(req, res)=>{
 
     
 })
-router.post('/connect/file_upload', function (req, res) {
+router.post('/file_upload', function (req, res) {
  
    console.log(req.files[0].path);  // 上传的文件信息
  
