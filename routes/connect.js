@@ -40,6 +40,9 @@ router.get('/',(req, res)=>{
 router.get('/upload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.user;
+    if (!fs.existsSync('/var/ftp/pub/'+id+'/')) {
+     fs.mkdirSync('/var/ftp/pub/'+id+'/');
+    }
     var stream = fs.createWriteStream('/var/ftp/pub/'+id+'/'+ curuser+'.doc');
     request('D:/下载/'+curuser+'_'+id+'.doc').pipe(stream).on('close', function(err){
         if(err){
