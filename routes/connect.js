@@ -150,6 +150,10 @@ router.post('/file_upload', function (req, res) {
  
    console.log(req.files[0]);  // 上传的文件信息
    var tempfilename = req.files[0].originalname;
+   var mysid = tempfilename.split("_")[0];
+   var myid = tempfilename.split("_")[1];
+   console.log(mysid);
+   console.log(myid);
    var des_file ="/var/ftp/pub/" + req.files[0].originalname; //文件名
    console.log(des_file);
    fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
