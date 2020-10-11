@@ -86,7 +86,7 @@ router.get('/upload',(req, res)=>{
     // }
     //新宝岛上传
     fs.readFile( 'D:/上传/'+curuser+'_'+id+'.txt', function (err, data) {
-		fs.writeFile('pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt', data, function (err) {
+		fs.writeFile('/var/ftp/pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt', data, function (err) {
 			if( err ){
 				console.log( err );
 			}else{
