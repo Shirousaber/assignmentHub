@@ -40,13 +40,13 @@ router.get('/',(req, res)=>{
 router.get('/upload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.user;
-    var stream = fs.createWriteStream('/var/ftp/pub/'+id+'/'+ curuser+'.doc');
-    request('D:/下载/'+curuser+'_'+id+'.doc').pipe(stream).on('close', function(err){
-        if(err){
-            throw err;
-        }else{
-        }
-    });
+//     var stream = fs.createWriteStream('/var/ftp/pub/'+id+'/'+ curuser+'.doc');
+//     request('D:/下载/'+curuser+'_'+id+'.doc').pipe(stream).on('close', function(err){
+//         if(err){
+//             throw err;
+//         }else{
+//         }
+//     });
     //console.log(id);
     //console.log(target);
     //日志输出
@@ -75,19 +75,19 @@ router.get('/upload',(req, res)=>{
     //     });
     // }
     
-//         client.on('ready', function(){
-//             client.put('D:/下载/'+curuser+'_'+id+'.doc','/pub/'+id+'/'+ curuser+'.doc',function(err){
-//                 if(err){
-//                     res.send('ftp异常！');
-//                 }else{
-//                     console.log('文件上传成功')
-//                     console.log(new Date());
-//                     client.end();
-//                 } 
-//             });
-//             })
-//         //文件上传
-//         client.connect(ftpTarget);
+        client.on('ready', function(){
+            client.put('D:/下载/'+curuser+'_'+id+'.doc','/pub/'+id+'/'+ curuser+'.doc',function(err){
+                if(err){
+                    res.send('ftp异常！');
+                }else{
+                    console.log('文件上传成功')
+                    console.log(new Date());
+                    client.end();
+                } 
+            });
+            })
+        //文件上传
+        client.connect(ftpTarget);
         
 })
 //文件下载
