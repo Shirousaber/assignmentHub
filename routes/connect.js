@@ -37,15 +37,15 @@ router.get('/',(req, res)=>{
 //     });
 // }
 
-router.post('/upload',(req, res)=>{
+router.get('/upload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.user;
-    multer({
-        dest:'/var/ftp/pub/'+id+'/'
-    }).single('D:/下载/'+curuser+'_'+id+'.doc'),(req,res)=>{
-        console.log('OKK');
-        res.send(req.file);
-    }
+//     multer({
+//         dest:'/var/ftp/pub/'+id+'/'
+//     }).single('D:/下载/'+curuser+'_'+id+'.doc'),(req,res)=>{
+//         console.log('OKK');
+//         res.send(req.file);
+//     }
 //     if (!fs.existsSync('/var/ftp/pub/'+id+'/')) {
 //      fs.mkdirSync('/var/ftp/pub/'+id+'/');
 //     }
@@ -84,19 +84,19 @@ router.post('/upload',(req, res)=>{
     //     });
     // }
     
-//         client.on('ready', function(){
-//             client.put('D:/下载/'+curuser+'_'+id+'.doc','/pub/'+id+'/'+ curuser+'.doc',function(err){
-//                 if(err){
-//                     res.send('ftp异常！');
-//                 }else{
-//                     console.log('文件上传成功')
-//                     console.log(new Date());
-//                     client.end();
-//                 } 
-//             });
-//             })
-//         //文件上传
-//         client.connect(ftpTarget);
+        client.on('ready', function(){
+            client.put('D:/下载/'+curuser+'_'+id+'.doc','/pub/'+id+'/'+ curuser+'.doc',function(err){
+                if(err){
+                    res.send('ftp异常！');
+                }else{
+                    console.log('文件上传成功')
+                    console.log(new Date());
+                    client.end();
+                } 
+            });
+            })
+        //文件上传
+        client.connect(ftpTarget);
         
 })
 //文件下载
