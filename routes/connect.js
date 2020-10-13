@@ -115,7 +115,7 @@ router.get('/upload',(req, res)=>{
 router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.stu;
-    res.download('/var/ftp/pub/'+id+'/'+ curuser+'.txt','D:/下载/'+curuser+'_'+id+'_copy.txt',function(err){
+    res.download('/var/ftp/pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt','D:/下载/'+curuser+'_'+id+'_copy.txt',function(err){
 //         if(err)
 //         {
 //             throw err;
