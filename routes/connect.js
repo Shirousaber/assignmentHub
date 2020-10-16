@@ -92,6 +92,15 @@ router.get('/upload',(req, res)=>{
 			if( err ){
 				console.log( err );
 			}else{
+				console.log('文件上传成功');
+				console.log(new Date());
+				fs.close(data, function(err){
+					if(err){
+						res.send('文件关闭失败');
+					}
+					console.log('文件链接已经关闭');
+					console.log(new Date());
+				})
 			}
 		});
 	});
@@ -116,6 +125,15 @@ router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var curuser = req.query.stu;
     res.download('/var/ftp/pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt','D:/下载/'+curuser+'_'+id+'_copy.txt',function(err){
+	    if(err){
+		    console.log('远程不存在或者本地文件丢失');
+		    console.log(new Date());
+		    res.send('远程不存在或者本地文件丢失');
+	    }
+	    else{
+		    console.log('文件下载成功');
+		    console.log(new Date());
+	    }
 //         if(err)
 //         {
 //             throw err;
