@@ -47,9 +47,14 @@ router.post('/file_upload', function (req, res) {
    console.log(myla);
    var des_file ="/var/ftp/pub/" +myid+"/"+mysid+".pdf"; //文件名
    console.log('des_file: '+des_file);
-   if(!fs.exists("/var/ftp/pub/" +myid)){
-	    fs.mkdir("/var/ftp/pub/" +myid);
+   if(!fs.existsSync("/var/ftp/pub/" +myid)){
+	    fs.mkdir("/var/ftp/pub/" +myid, (err)=>{
+		    res.send('创建文件夹失败');
+	    });
 	    console.log('创建成功!');
+    }esle
+    {
+	    console.log('远程文件夹已经存在，开始写操作……');
     }
    fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
         fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
