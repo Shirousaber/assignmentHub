@@ -35,7 +35,7 @@ router.get('/dload',(req, res)=>{
 	})
 })
 router.post('/file_upload', function (req, res) {
- 
+   console.log('进入了函数')
    console.log(req.files[0]);  // 上传的文件信息
    var tempfilename = req.files[0].originalname;
    var mysid = tempfilename.split("_")[0];
