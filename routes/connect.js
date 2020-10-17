@@ -1,21 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const ftp = require('ftp');//连接FTP
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const koaBody = require('koa-body');
 
-var ftpTarget ={
-    host: "localhost",
-    port: "21",
-    user:"ftp",
-    password:""
-};
 
-//用于实现ftp服务器的链接
 
-//用于实现ftp服务器的链接
 
 router.get('/',(req, res)=>{
     res.render('upload');
@@ -23,38 +14,7 @@ router.get('/',(req, res)=>{
 })
 
 
-router.get('/upload',(req, res)=>{
-    var id = req.query.id;
-    var curuser = req.query.user;
-    const client = new ftp();
-    //如果不存在该路径就创建相关文件夹
-    if(!fs.existsSync('/var/ftp/pub/'+id)){
-	    fs.mkdir('/var/ftp/pub/'+id);
-    }
-    //新宝岛上传
-    fs.readFile('http://'+req.headers.host+'/D:/上传/' +curuser+'_'+id+'.txt', function (err, data) {
-		fs.writeFile('/var/ftp/pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt', data, function (err) {
-			console.log(data)
-			if( err ){
-				console.log( err );
-				res.send('文件上传失败');
-			}else{
-				console.log('文件上传成功');
-				console.log(new Date());
-				fs.close(data, function(err){
-					if(err){
-						res.send('文件关闭失败');
-					}
-					console.log('文件链接已经关闭');
-					console.log(new Date());
-				})
-			}
-		});
-	});
-    
 
-        
-})
 //文件下载
 router.get('/dload',(req, res)=>{
     var id = req.query.id;
