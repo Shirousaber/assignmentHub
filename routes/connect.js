@@ -63,8 +63,8 @@ router.post('/file_upload', function (req, res) {
                 }
                 console.log( response );
                 res.end( JSON.stringify( response ) );
+                });
             });
-        });
        }else
        {
            fs.mkdir("/var/ftp/pub/" +myid, function(err){
@@ -73,20 +73,21 @@ router.post('/file_upload', function (req, res) {
                }
                else{
                    console.log('创建成功');
-		   fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
-                fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
-                if( err ){
-                    console.log( err );
-                }else{
-                    // 文件上传成功，respones给客户端
-                    response = {
-                        message:'File uploaded successfully', 
-                        filename:req.files[0].originalname
-                    };
-                }
-                console.log( response );
-                res.end( JSON.stringify( response ) );
-            });
+                   fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
+                    fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
+                    if( err ){
+                        console.log( err );
+                    }else{
+                        // 文件上传成功，respones给客户端
+                        response = {
+                            message:'File uploaded successfully', 
+                            filename:req.files[0].originalname
+                        };
+                    }
+                    console.log( response );
+                    res.end( JSON.stringify( response ) );
+                    });
+                });
                }
            });
        }
@@ -96,4 +97,3 @@ router.post('/file_upload', function (req, res) {
 
 
 module.exports=router;
-
