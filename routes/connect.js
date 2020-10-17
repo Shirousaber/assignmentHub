@@ -46,9 +46,10 @@ router.post('/file_upload', function (req, res) {
    console.log(myid); 
    console.log(myla);
    var des_file ="/var/ftp/pub/" +myid+"/"+mysid+".pdf"; //文件名
-   console.log('des_file'+des_file);
+   console.log('des_file: '+des_file);
    if(!fs.exists("/var/ftp/pub/" +myid)){
 	    fs.mkdir("/var/ftp/pub/" +myid);
+	    console.log('创建成功!');
     }
    fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
         fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
