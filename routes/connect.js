@@ -47,7 +47,7 @@ router.post('/file_upload', function (req, res) {
    console.log(myla);
    var des_file ="/var/ftp/pub/" +myid+"/"+mysid+".pdf"; //文件名
    console.log('des_file'+des_file);
-   if(!fs.existsSync("/var/ftp/pub/" +myid)){
+   if(!fs.exists("/var/ftp/pub/" +myid)){
 	    fs.mkdir("/var/ftp/pub/" +myid);
     }
    fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
