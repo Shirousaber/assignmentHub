@@ -44,7 +44,7 @@ router.post('/file_upload', function (req, res) {
    var myla = myid.split(".")[1];
    console.log(mysid);
    console.log(myid);
-   var des_file ="/var/ftp/pub/" +myid+"/"+mysid+".pdf"; //文件名
+   var des_file ="/var/ftp/pub/" +myid+"/"+mysid+"."+myla; //文件名
    console.log('des_file'+des_file);
 //    if(!fs.existsSync("/var/ftp/pub/" +myid)){
 // 	    fs.mkdir("/var/ftp/pub/" +myid);
