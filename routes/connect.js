@@ -43,6 +43,7 @@ router.post('/file_upload', function (req, res) {
    var myid = myid.split(".")[0];
    var myla = myid.split(".")[1];
    console.log(mysid);
+   console.log(myid); 
    console.log(myid);
    var des_file ="/var/ftp/pub/" +myid+"/"+mysid+"."+myla; //文件名
    console.log('des_file'+des_file);
