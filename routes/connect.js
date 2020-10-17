@@ -67,7 +67,14 @@ router.post('/file_upload', function (req, res) {
         });
        }else
        {
-           fs.mkdir("/var/ftp/pub/" +myid);
+           fs.mkdir("/var/ftp/pub/" +myid, function(err){
+               if(err){
+                   throw err;
+               }
+               else{
+                   console.log('创建成功');
+               }
+           });
        }
     })
 })
