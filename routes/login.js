@@ -195,7 +195,7 @@ router.get('/stulogin',function(req,res){
                     conn.release();
                     })
                 }
-                var sql = "select * from class where sid = '"+curruser+"'";
+                var sql = "select deadline, tid, cname from class where sid = '"+curruser+"'";
                 var sqlArr = [];
                 var callBack = (err, data)=>{
                     if(err){
