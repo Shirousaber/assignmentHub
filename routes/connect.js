@@ -18,8 +18,8 @@ router.get('/',(req, res)=>{
 //文件下载
 router.get('/dload',(req, res)=>{
     var id = req.query.id;
-    var curuser = req.query.stu;
-    res.download('/var/ftp/pub/'+id+'/'+curuser+'_'+id+'.remote-copy.txt','D:/下载/'+curuser+'_'+id+'_copy.txt',function(err){
+    var stuid = req.query.stu;
+    res.download('/var/ftp/pub/'+id+'/'+stuid+'.pdf','D:/下载/'+stuid+'_'+id+'_copy.pdf',function(err){
 	    if(err){
 		    console.log('远程不存在或者本地文件丢失');
 		    console.log(new Date());
