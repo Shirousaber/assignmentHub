@@ -40,13 +40,16 @@ router.post('/file_upload', function (req, res) {
    var tempfilename = req.files[0].originalname;
    var mysid = tempfilename.split("_")[0];
    var myid = tempfilename.split("_")[1];
-   var myid = myid.split(".")[0];
-   var myla = myid.split(".")[1];
-   console.log(mysid);
-   console.log(myid); 
-   console.log(myla);
-   var des_file ="/var/ftp/pub/" +myid+"/"+mysid+".pdf"; //文件名
-   console.log('des_file: '+des_file);
+   var myfile = tempfilename.split(".")[2];
+   var myname = myfile.split(".")[0];
+   var mylas = myfile.split(".")[1];
+   
+   console.log('学号:'+mysid);
+   console.log('作业id号码:'+myid); 
+   console.log('学生姓名:'+myname); 
+   console.log('文件后缀:'+mylas);
+   var des_file ="/var/ftp/pub/" +myid+"/"+mysid+"_"+myname+".pdf"; //文件名
+   console.log('目标地址: '+des_file);
    fs.exists("/var/ftp/pub/"+myid,function(exists){
        if(exists)
        {
