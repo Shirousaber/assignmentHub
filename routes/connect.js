@@ -40,7 +40,7 @@ router.post('/file_upload', function (req, res) {
    var tempfilename = req.files[0].originalname;
    var mysid = tempfilename.split("_")[0];
    var myid = tempfilename.split("_")[1];
-   var myfile = tempfilename.split(".")[2];
+   var myfile = tempfilename.split("_")[2];
    var myname = myfile.split(".")[0];
    var mylas = myfile.split(".")[1];
    
