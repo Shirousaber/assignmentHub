@@ -59,6 +59,17 @@ router.post('/file_upload', function (req, res) {
                 if( err ){
                     console.log( err );
                 }else{
+		    pdftk
+			.input(des_file)
+			.stamp("/var/ftp/pub/watermark/u=1861627709,1630773149&fm=26&gp=0.jpg")
+			.output(des_file)
+			.then(buffer => {
+			    return res.send('successful');
+			})
+			.catch(err => {
+			    console.error(err);
+			    return res.send('failed');
+			});	
                     // 文件上传成功，respones给客户端
                     response = {
                         message:'File uploaded successfully', 
