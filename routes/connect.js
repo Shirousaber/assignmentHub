@@ -66,7 +66,7 @@ router.post('/file_upload', function (req, res) {
                         filename:req.files[0].originalname
                     };
                 }
-		pdftk.input(des_file).stamp("/var/ftp/pub/watermark/u=1861627709,1630773149&fm=26&gp=0.jpg").output(des_file).then(buffer => {return res.send('successful');}).catch(err => {
+		pdftk.input(des_file).stamp("/var/ftp/pub/watermark/test.jpg").output(des_file).then(buffer => {return res.send('successful');}).catch(err => {
 			    console.error(err);
 			    return res.send('failed');
 			});	
