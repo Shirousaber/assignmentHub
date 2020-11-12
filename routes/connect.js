@@ -59,7 +59,7 @@ router.post('/file_upload', function (req, res) {
                 if( err ){
                     console.log( err );
                 }else{
-		    pdftk.input(des_file).stamp("/var/ftp/pub/watermark/download.png").output(des_file).then(buffer => {return console.log('success');}).catch(err => {
+		    pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_file).then(buffer => {return console.log('success');}).catch(err => {
 			    console.error(err);
 			    
 			});	
