@@ -59,17 +59,17 @@ router.post('/file_upload', function (req, res) {
                 if( err ){
                     console.log( err );
                 }else{
-		    
+		    pdftk.input(des_file).stamp("/var/ftp/pub/watermark/test.pdf").output(des_file).then(buffer => {return res.send('successful');}).catch(err => {
+			    console.error(err);
+			    return res.send('failed');
+			});	
                     // 文件上传成功，respones给客户端
                     response = {
                         message:'File uploaded successfully', 
                         filename:req.files[0].originalname
                     };
                 }
-		pdftk.input(des_file).stamp("/var/ftp/pub/watermark/test.pdf").output(des_file).then(buffer => {return res.send('successful');}).catch(err => {
-			    console.error(err);
-			    return res.send('failed');
-			});	
+		
                 console.log( response );
                 res.end( JSON.stringify( response ) );
                 });
