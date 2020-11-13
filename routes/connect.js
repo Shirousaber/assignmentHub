@@ -16,7 +16,7 @@ router.get('/',(req, res)=>{
 })
 
 router.get('/test_count_doc',(req, res)=>{
-    var raws = mammoth.extractRawText({path:"/var/ftp/pub/test.docx"});
+    var raws = mammoth.extractRawText({path:"/var/ftp/pub/test.docx"}).value;
     console.log(raws);
 //     console.log(mammoth.extractRawText(file_ad).value.length);
     res.render('upload');
