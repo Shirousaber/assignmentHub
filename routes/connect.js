@@ -5,6 +5,7 @@ const fs = require('fs');
 const multer = require('multer');
 const koaBody = require('koa-body');
 const pdftk = require('node-pdftk');
+var mammoth = require("mammoth");
 
 
 
@@ -14,7 +15,10 @@ router.get('/',(req, res)=>{
     
 })
 
-
+router.get('/test_count_doc',(req, res)=>{
+    res.render('upload');
+    
+})
 
 //文件下载
 router.get('/dload',(req, res)=>{
