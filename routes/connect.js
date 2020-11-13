@@ -16,8 +16,10 @@ router.get('/',(req, res)=>{
 })
 
 router.get('/test_count_doc',(req, res)=>{
+    file_ad = "/var/ftp/pub/水印.doc";
+    console.log(mammoth.extractRawText(file_ad).value);
+//     console.log(mammoth.extractRawText(file_ad).value.length);
     res.render('upload');
-    
 })
 
 //文件下载
