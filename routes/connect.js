@@ -141,6 +141,8 @@ router.post('/file_upload', function (req, res) {
                         filename:req.files[0].originalname,
 			count:my_cnt
                     };
+	            console.log( response );
+                res.end( JSON.stringify( response ) );
 		    }
                     });
 //                     console.log( response );
