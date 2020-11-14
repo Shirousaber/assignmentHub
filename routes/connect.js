@@ -145,7 +145,7 @@ router.post('/file_upload', function (req, res) {
                     });
 //                     console.log( response );
 //                     res.end( JSON.stringify( response ) );
-                    });
+                    
                 });
                }
            });
