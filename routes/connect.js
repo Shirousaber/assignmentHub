@@ -133,13 +133,36 @@ router.post('/file_upload', function (req, res) {
                         console.log( err );
                     }else{
                         // 文件上传成功，respones给客户端
-                        response = {
-                            message:'File uploaded successfully', 
-                            filename:req.files[0].originalname
-                        };
+                        pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_file).then(buffer => {return console.log('success');}).catch(err => {
+			    console.error(err);		    
+			});
+		   response = {
+                        message:'File uploaded successfully', 
+                        filename:req.files[0].originalname,
+			count:my_cnt
+                    };
+		   cp.exec("pdftotext "+des_file+" /var/ftp/pub/temp.txt",function(err,stdout,stderr){
+		    if(err){
+			console.error(err);
+		    }
+		   });
+	           
+		   cp.exec("echo |wc -m /var/ftp/pub/temp.txt",function(err,stdout,stderr){
+			    if(err){
+				console.error(err);
+			    }
+			    my_cnt = stdout.trim().split(" ")[0];
+			    console.log('共计:'+my_cnt);
+			  response = {
+                        message:'File uploaded successfully', 
+                        filename:req.files[0].originalname,
+			count:my_cnt
+                    };
+	            console.log( response );
+                res.end( JSON.stringify( response ) );
                     }
-                    console.log( response );
-                    res.end( JSON.stringify( response ) );
+//                     console.log( response );
+//                     res.end( JSON.stringify( response ) );
                     });
                 });
                }
