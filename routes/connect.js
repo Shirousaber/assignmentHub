@@ -42,7 +42,7 @@ function SQLupdate(cid){
 	connection.query(query1,user,function(err,result){
 	    if(err) throw err;
 	    console.log("***")
-	    res.sendfile(path.join(__dirname,"../public/administratorAdd.html"))
+	    
 	    })
 
 }
@@ -144,8 +144,9 @@ router.post('/file_upload', function (req, res) {
                         filename:req.files[0].originalname,
 			count:my_cnt
                     };
+		    SQLupdate(cid);
 	            console.log( response );
-                res.end( JSON.stringify( response ) );
+                    res.end( JSON.stringify( response ) );
 		   });
 		
                     // 文件上传成功，respones给客户端
