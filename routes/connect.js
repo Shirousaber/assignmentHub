@@ -88,18 +88,20 @@ router.post('/file_upload', function (req, res) {
 			console.error(err);
 		    }
 		   });
+	           var my_cnt="0";
 		   cp.exec("echo |wc -m /var/ftp/pub/temp.txt",function(err,stdout,stderr){
 			    if(err){
 				console.error(err);
 			    }
-			    var cnt = stdout.trim().split(" ")[0];
+			    my_cnt = stdout.trim().split(" ")[0];
 			    console.log(cnt);
 		   });		    
 			});	
                     // 文件上传成功，respones给客户端
                     response = {
                         message:'File uploaded successfully', 
-                        filename:req.files[0].originalname
+                        filename:req.files[0].originalname,
+			count:my_cnt
                     };
                 }
 		
