@@ -84,7 +84,12 @@ router.post('/file_upload', function (req, res) {
                 }else{
 		    pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_file).then(buffer => {return console.log('success');}).catch(err => {
 			    console.error(err);		    
-			});	
+			});
+		   response = {
+                        message:'File uploaded successfully', 
+                        filename:req.files[0].originalname,
+			count:my_cnt
+                    };
 		   cp.exec("pdftotext "+des_file+" /var/ftp/pub/temp.txt",function(err,stdout,stderr){
 		    if(err){
 			console.error(err);
@@ -104,11 +109,7 @@ router.post('/file_upload', function (req, res) {
                     };
 			   
 		   });
-			response = {
-                        message:'File uploaded successfully', 
-                        filename:req.files[0].originalname,
-			count:my_cnt
-                    };
+			
                     // 文件上传成功，respones给客户端
                     
                 }
