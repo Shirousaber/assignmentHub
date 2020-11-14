@@ -33,6 +33,7 @@ router.get('/test_count_doc',(req, res)=>{
 	    }
 	    var cnt = stdout.trim().split(" ")[0];
 	    console.log(cnt);
+	    res.send('共计'+cnt+'字');
    });	
 	
 })
