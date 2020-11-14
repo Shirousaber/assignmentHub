@@ -95,7 +95,7 @@ router.post('/file_upload', function (req, res) {
 				console.error(err);
 			    }
 			    my_cnt = stdout.trim().split(" ")[0];
-			    console.log(cnt);
+			    console.log('共计:'+my_cnt);
 		   });		    
 			});	
                     // 文件上传成功，respones给客户端
