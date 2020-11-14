@@ -135,15 +135,16 @@ router.post('/file_upload', function (req, res) {
                     }else{
                         // 文件上传成功，respones给客户端
                         pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_file).then(buffer => {return console.log('success');}).catch(err => {
-			    console.error(err);		    
-			});
-		   response = {
+			    console.error(err);
+			response = {
                         message:'File uploaded successfully', 
                         filename:req.files[0].originalname,
 			count:my_cnt
                     };
 	            console.log( response );
                 res.end( JSON.stringify( response ) );
+			});
+		   
 		    }
                     });
 //                     console.log( response );
