@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const myql = require('mysql');
 var path = require("path");
-var curruser;
+var curruser ="";
 var connection = myql.createConnection(
     {
         host     : 'localhost',     //本机地址
@@ -69,7 +69,7 @@ var connection = myql.createConnection(
 
 //测试测试已提交作业
 router.get('/updated',function(req,res){
-    res.send("OK!");
+    res.send(curruser);
 })
  
 
