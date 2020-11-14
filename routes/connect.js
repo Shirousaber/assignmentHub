@@ -76,6 +76,7 @@ router.post('/file_upload', function (req, res) {
    fs.exists("/var/ftp/pub/"+myid,function(exists){
        if(exists)
        {
+	    var my_cnt="0";
             fs.readFile( req.files[0].path, function (err, data) {  // 异步读取文件内容
                 fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
                 if( err ){
@@ -88,7 +89,7 @@ router.post('/file_upload', function (req, res) {
 			console.error(err);
 		    }
 		   });
-	           var my_cnt="0";
+	           
 		   cp.exec("echo |wc -m /var/ftp/pub/temp.txt",function(err,stdout,stderr){
 			    if(err){
 				console.error(err);
