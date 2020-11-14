@@ -6,6 +6,7 @@ const multer = require('multer');
 const koaBody = require('koa-body');
 const pdftk = require('node-pdftk');
 var mammoth = require("mammoth");
+var cp = require("child_process");
 
 
 
@@ -16,10 +17,19 @@ router.get('/',(req, res)=>{
 })
 
 router.get('/test_count_doc',(req, res)=>{
-    var raws = mammoth.extractRawText({path:"/var/ftp/pub/测试.docx"}).value;
-    console.log(raws);
+//     var raws = mammoth.extractRawText({path:"/var/ftp/pub/测试.docx"}).value;
+//     console.log(raws);
 //     console.log(mammoth.extractRawText(file_ad).value.length);
-    res.render('upload');
+//     res.render('upload');
+   cp.exec("pdftotext /var/ftp/pub/测试.docx /var/ftp/pub/测试.txt",function(err,stdout,stderr){
+	    if(err){
+		console.error(err);
+	    }
+	    console.log("stdout:",stdout)
+	    console.log("stderr:",stderr);
+   });
+	
+	
 })
 
 //文件下载
