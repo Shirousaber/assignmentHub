@@ -107,7 +107,8 @@ router.post('/file_upload', function (req, res) {
                         filename:req.files[0].originalname,
 			count:my_cnt
                     };
-			   
+	            console.log( response );
+                res.end( JSON.stringify( response ) );
 		   });
 			
                     // 文件上传成功，respones给客户端
