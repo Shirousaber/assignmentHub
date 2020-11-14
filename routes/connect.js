@@ -28,7 +28,13 @@ router.get('/test_count_doc',(req, res)=>{
 	    console.log("stdout:",stdout)
 	    console.log("stderr:",stderr);
    });
-	
+   cp.exec("echo |wc -w /var/ftp/pub/5/181090901_赵强.txt",function(err,stdout,stderr){
+	    if(err){
+		console.error(err);
+	    }
+	    console.log("stdout:",stdout)
+	    console.log("stderr:",stderr);
+   });	
 	
 })
 
