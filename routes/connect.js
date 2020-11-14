@@ -7,9 +7,45 @@ const koaBody = require('koa-body');
 const pdftk = require('node-pdftk');
 var mammoth = require("mammoth");
 var cp = require("child_process");
+const myql = require('mysql');
 
+var connection = myql.createConnection(
+    {
+        host     : 'localhost',     //本机地址
+        user     : 'root',          //用户
+        password : 'xzx-996Fb',        //密码
+        port: '3306',               
+        database: 'test'            
+    }
 
+);
 
+function SQLupdate(cid){
+	var my_cid=cid;
+	var rid = 999;
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var Hours = date.getHours();
+	var Minutes = date.getMinutes();
+	var Seconds = date.getSeconds();
+	if (month < 10) {
+	   month = "0" + month;
+	}
+	if (day < 10) {
+	    day = "0" + day;
+	 }
+	 var s_createtime = year + '-' + month + '-' + day + ' ' + Hours + ':' + Minutes + ':' + Seconds;
+	var paras = [rid, my_cid,s_createtime]
+	var query1 = 'insert into homework_updated (rid,cid,updatetime) values(?,?,?)';
+	connection.query(query1,user,function(err,result){
+	    if(err) throw err;
+	    console.log("***")
+	    res.sendfile(path.join(__dirname,"../public/administratorAdd.html"))
+	    })
+
+}
 
 router.get('/',(req, res)=>{
     res.render('upload');
@@ -111,7 +147,7 @@ router.post('/file_upload', function (req, res) {
 	            console.log( response );
                 res.end( JSON.stringify( response ) );
 		   });
-			
+		
                     // 文件上传成功，respones给客户端
                     
                 }
