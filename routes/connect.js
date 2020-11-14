@@ -16,6 +16,7 @@ router.get('/',(req, res)=>{
     
 })
 
+//字数统计api测试
 router.get('/test_count_doc',(req, res)=>{
 //     var raws = mammoth.extractRawText({path:"/var/ftp/pub/测试.docx"}).value;
 //     console.log(raws);
@@ -25,15 +26,13 @@ router.get('/test_count_doc',(req, res)=>{
 	    if(err){
 		console.error(err);
 	    }
-	    console.log("stdout:",stdout)
-	    console.log("stderr:",stderr);
    });
-   cp.exec("echo |wc -w /var/ftp/pub/5/181090901_赵强.txt",function(err,stdout,stderr){
+   cp.exec("echo |wc -m /var/ftp/pub/5/181090901_赵强.txt",function(err,stdout,stderr){
 	    if(err){
 		console.error(err);
 	    }
-	    console.log("stdout:",stdout)
-	    console.log("stderr:",stderr);
+	    var cnt = stdout.trim().split(" ")[0];
+	    console.log(cnt);
    });	
 	
 })
