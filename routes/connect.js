@@ -20,7 +20,7 @@ var connection = myql.createConnection(
 
 );
 
-function SQLupdate(cid){
+function SQLupdate(cid, cnt){
 	var my_cid=cid;
 	var rid = 999;
 	var date = new Date();
@@ -37,8 +37,8 @@ function SQLupdate(cid){
 	    day = "0" + day;
 	 }
 	 var s_createtime = year + '-' + month + '-' + day + ' ' + Hours + ':' + Minutes + ':' + Seconds;
-	var paras = [rid, my_cid,s_createtime]
-	var query1 = 'insert into homework_updated (rid,cid,updatetime) values(?,?,?)';
+	var paras = [rid, my_cid,s_createtime, cnt]
+	var query1 = 'insert into homework_updated (rid,cid,updatetime,cnt) values(?,?,?,?)';
 	connection.query(query1,paras,function(err,result){
 	    if(err) throw err;
 	    console.log("***")
@@ -144,7 +144,7 @@ router.post('/file_upload', function (req, res) {
                         filename:req.files[0].originalname,
 			count:my_cnt
                     };
-		    SQLupdate(myid);
+		    SQLupdate(myid, my_cnt);
 	            console.log( response );
                     res.end( JSON.stringify( response ) );
 		   });
