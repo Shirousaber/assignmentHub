@@ -67,7 +67,10 @@ var connection = myql.createConnection(
 // })
 
 
-
+//测试测试已提交作业
+router.get('/updated',function(req,res){
+    res.send("OK!");
+})
  
 
 connection.connect()
