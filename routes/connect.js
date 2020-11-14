@@ -84,7 +84,7 @@ router.post('/file_upload', function (req, res) {
                 }else{
 		    pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_file).then(buffer => {return console.log('success');}).catch(err => {
 			    console.error(err);
-		   cp.exec("pdftotext "+des_file+"/var/ftp/pub/temp.txt",function(err,stdout,stderr){
+		   cp.exec("pdftotext "+des_file+" /var/ftp/pub/temp.txt",function(err,stdout,stderr){
 		    if(err){
 			console.error(err);
 		    }
