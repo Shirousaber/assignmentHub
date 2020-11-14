@@ -21,7 +21,7 @@ router.get('/test_count_doc',(req, res)=>{
 //     console.log(raws);
 //     console.log(mammoth.extractRawText(file_ad).value.length);
 //     res.render('upload');
-   cp.exec("pdftotext /var/ftp/pub/测试.docx /var/ftp/pub/测试.txt",function(err,stdout,stderr){
+   cp.exec("pdftotext /var/ftp/pub/5/181090901_赵强.pdf /var/ftp/pub/5/181090901_赵强.txt",function(err,stdout,stderr){
 	    if(err){
 		console.error(err);
 	    }
