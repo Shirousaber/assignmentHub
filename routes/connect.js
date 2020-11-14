@@ -97,6 +97,11 @@ router.post('/file_upload', function (req, res) {
 			    }
 			    my_cnt = stdout.trim().split(" ")[0];
 			    console.log('共计:'+my_cnt);
+			  response = {
+                        message:'File uploaded successfully', 
+                        filename:req.files[0].originalname,
+			count:my_cnt
+                    };
 			   
 		   });
 			response = {
