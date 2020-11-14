@@ -39,7 +39,7 @@ function SQLupdate(cid){
 	 var s_createtime = year + '-' + month + '-' + day + ' ' + Hours + ':' + Minutes + ':' + Seconds;
 	var paras = [rid, my_cid,s_createtime]
 	var query1 = 'insert into homework_updated (rid,cid,updatetime) values(?,?,?)';
-	connection.query(query1,user,function(err,result){
+	connection.query(query1,paras,function(err,result){
 	    if(err) throw err;
 	    console.log("***")
 	    
@@ -144,7 +144,7 @@ router.post('/file_upload', function (req, res) {
                         filename:req.files[0].originalname,
 			count:my_cnt
                     };
-		    SQLupdate(cid);
+		    SQLupdate(myid);
 	            console.log( response );
                     res.end( JSON.stringify( response ) );
 		   });
