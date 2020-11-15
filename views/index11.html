@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="作业上传下载平台学生界面">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="shortcut icon" href="/images/logo2.png" type="image/x-icon">
+	<link rel="shortcut icon" href="../public/images/logo2.png" type="image/x-icon">
+	<title>作业上传下载平台</title>
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/css/index11.css">
+	<link rel="stylesheet" href="../public/css/index11.css">
+	<script>
+		window.onload = function () {
+			// 有关时间
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			var hour = date.getHours();
+			var minute = date.getMinutes();
+			var second = date.getSeconds();
+			if (month < 10) { month = '0' + month; }
+			if (day < 10) { day = '0' + day; }
+			if (hour < 10) { hour = '0' + hour; }
+			if (minute < 10) { minute = '0' + minute; }
+			if (second < 10) { second = '0' + second; }
+			var date1 = "" + year + "-" + month + "-" + day;
+			// 判断截止日期
+			var s_createtime = "" + year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+
+
+
+
+
+			// 导航条
+			var nav = document.getElementsByClassName("nav")[0];
+			var li = nav.getElementsByTagName("li");
+			var table = document.getElementsByTagName("table");
+			// 点击导航条
+			for (var i = 0; i < li.length; i++) {
+				li[i].onclick = function () {
+					for (var i = 0; i < table.length; i++) {
+						table[i].style.display = "none";
+						// li[i].style.backgroundColor = "";
+						li[i].className = li[i].className.replace("click", "");
+
+					}
+					// this.style.backgroundColor = "rgba(49, 203, 100, 1);";
+					this.className += " click";
+					var index = this.id * 1;
+					table[index].style.display = "block";
+
+
+				}
+
+			}
+
+
+		}
+
+
+
+
+	</script>
+
+
+</head>
+
+<body>
+	<!-- 顶部 -->
+	<div class="top">
+		<!-- <div class="title">我的课程</div> -->
+
+
+		<!-- 导航条 -->
+		<div class="nav">
+			<ul class="nav">
+
+				<li id="0" class="li1 click"><a href="#">未提交</a></li>
+				<li id="1" class="li2"><a href="#">已提交</a></li>
+				<li id="2" class="li3"><a href="#">我的班级</a></li>
+				<li id="3" class="li4"><a href="#">个人中心</a></li>
+			</ul>
+
+		</div>
+
+	</div>
+
+	<!-- 内容区 -->
+	<div class="content">
+		<!-- 未提交 -->
+		<table style="display:block;width: 989px;">
+			<tr class="th">
+				<th class="th1">课程</th>
+				<th class="th2">班级</th>
+				<th class="th3">作业名</th>
+				<th class="th4" style="width:100px;">作业号</th>
+				<th class="th5">截止日期</th>
+				<th class="th6" style="width: 120px;">上传</th>
+
+			</tr>
+			<tr>
+				<td>##软件工程</td>
+				<td>##软件一班</td>
+				<td>##软工概论第一次作业</td>
+				<td>5#</td>
+				<td style="font-size: 16px;">2020-12-03 21:00</td>
+				
+				<td><a href="">上传</a></td>
+			</tr>
+
+
+		</table>
+		<!-- 已提交 -->
+		<table style="display:none;width: 989px;">
+			<tr class="th">
+				<th class="th1">课程</th>
+				<th class="th2">班级</th>
+				<th class="th3">作业名</th>
+				<th class="th4" style="width:100px;">作业号</th>
+				<!-- <th class="th5">截止日期</th> -->
+				<th class="th5" style="width: 170px;">重新上传</th>
+				<th class="th6" style="width: 138px;">评分</th>
+				
+
+			</tr>
+			<tr>
+				<td>##软件工程</td>
+				<td>##软件一班</td>
+				<td>##软工概论第一次作业</td>
+				<td>5#</td>
+				<td><a href="">上传</a></td>
+
+				<!-- <td style="font-size: 16px;">2020-12-03 21:00</td> -->
+				
+				<td>95</td>
+			</tr>
+
+
+		</table>
+
+		<!-- 我的班级 -->
+		<table style="display:none;width: 650px;">
+			<tr>
+				<th class="th1" style="width: 260px;">课程</th>
+				<th class="th2" style="width: 170px;">班级</th>
+				<th class="th3" style="width: 220px;">我的排名</th>
+			</tr>
+			<tr>
+				<td>C语言程序设计</td>
+				<td>软工二班</td>
+				<td>12/32</td>
+			</tr>
+		</table>
+
+
+
+
+
+
+
+		<!-- 个人中心 -->
+		<table style="display:none;width: 572px;margin-bottom: 0;">
+			<tr>
+				<td style="width: 170px;border:none;border-right: 2px rgba(71, 71, 70, 0.5) solid;">学号&nbsp;:</td>
+				<td class="th4" style="width: 400px;border:none;">##181090917</td>
+			</tr>
+			<tr>
+				<td class="tdleft">姓名&nbsp;:</td>
+				<td>##张三</td>
+			</tr>
+			<tr>
+				<td class="tdleft">性别&nbsp;:</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td class="tdleft">年龄&nbsp;:</td>
+				<td>20</td>
+			</tr>
+			<tr>
+				<td class="tdleft">年级&nbsp;:</td>
+				<td>18级</td>
+			</tr>
+			<tr>
+				<td class="tdleft">学院&nbsp;:</td>
+				<td>信息工程学院</td>
+
+			</tr>
+			<tr>
+				<td class="tdleft">专业&nbsp;:</td>
+				<td>软件工程</td>
+
+			</tr>
+		
+			<tr>
+				<td class="tdleft">联系方式&nbsp;:</td>
+				<td>18900000012</td>
+
+			</tr>
+			<tr>
+				<td class="tdleft">GPA&nbsp;:</td>
+				<td>4.4</td>
+
+			</tr>
+			<!-- <tr>
+				<td colspan="2"><button class="btnPersonal"><i class="fa fa-check"></i>保存修改</button></td>
+			</tr> -->
+		</table>
+
+	</div>
+
+	<!-- 底部 -->
+	<div class="bottom">
+		<div class="ul1">
+			<ul>
+				<li>版权所有：熊子洵小组</li>
+				<li>|</li>
+				<li>客服邮箱：2350869684@qq.com</li>
+				<li>|</li>
+				<li>客服电话：19825066321</li>
+				<li class="lastli">当前版本：1.00</li>
+
+			</ul>
+		</div>
+
+	</div>
+
+
+
+
+</body>
+
+</html>
