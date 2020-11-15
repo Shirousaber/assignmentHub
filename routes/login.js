@@ -66,6 +66,11 @@ var connection = myql.createConnection(
 //     console.log(str);
 // })
 
+//测试测试已提交作业
+router.get('/updated',function(req,res){
+    res.sendfile(path.join(__dirname,"../public/tIndex.html"))
+})
+
 
 //测试测试已提交作业
 router.get('/updated',function(req,res){
@@ -94,7 +99,7 @@ router.get('/login',function(req,res){
         }else{
             setTimeout(function(){
                 res.sendfile(path.join(__dirname,"../public/administratorAdd.html"))
-            }, 1000)
+            }, 10)
             }
     })
 })
