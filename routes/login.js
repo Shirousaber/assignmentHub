@@ -158,7 +158,7 @@ router.get('/tclogin',function(req,res){
                         });
                     }
                 }
-//                 sqlConnect(sql,sqlArr,callBack)      
+                sqlConnect(sql,sqlArr,callBack)      
 //              res.sendfile(path.join(__dirname,"../public/tIndex.html"))
             
             //res.sendfile(path.join(__dirname,"../public/teacherd.html"))
