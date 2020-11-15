@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="作业上传下载平台教师界面">
+    <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
+    <title>教师界面</title>
+    <link rel="stylesheet" href="css/tIndex.css">
+    <link rel="stylesheet" href="../../assignmentHub/图标字体/css/all.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        window.onload = function () {
+            // 有关时间
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            if (month < 10) { month = '0' + month; }
+            if (day < 10) { day = '0' + day; }
+            if (hour < 10) { hour = '0' + hour; }
+            if (minute < 10) { minute = '0' + minute; }
+            if (second < 10) { second = '0' + second; }
+            var date1 = "" + year + "-" + month + "-" + day;
+            // 判断截止日期
+            var s_createtime = "" + year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+            // 导航条
+            var nav = document.getElementsByClassName("nav")[0];
+            var li = nav.getElementsByTagName("li");
+            var personal = document.getElementsByClassName("personal")[0];
+            var classes = document.getElementsByClassName("classes")[0];
+            // 显示的表格
+            var tables = document.getElementsByTagName("table");
+            var inputDate = document.getElementsByClassName("date")[0];
+            // publish表中的下拉框
+            var publishselect1 = document.getElementById("publishselect1");
+            var homeworkName = document.getElementById("homeworkName");
+            // 获取顶部提示
+            var tip = document.getElementsByClassName("tip")[0];
+            // 获取提示ul
+            var litip = tip.getElementsByTagName("li");
+            // 您目前所在位置
+            var radial = document.getElementsByClassName("radial")[0];
+            // 作业管理表中的搜索
+
+            // 获取已下载和未下载
+            var download = document.getElementsByClassName("download");
+            // 绑定按钮，准备发送ajax
+            var btnPersonal = document.getElementsByClassName("btnPersonal")[0];
+            var btnPublish = document.getElementsByClassName("btnPublish")[0];
+            var btnDownload = document.getElementsByClassName("btnDownload")[0];
+            // 作业管理表中的搜索
+            var btnSearch = document.getElementsByClassName("btnSearch")[0];
+            // 获取个人中心中的input
+            var userName = document.getElementsByName("userName")[0];
+            var pwd = document.getElementsByName("pwd")[0];
+            var trueName = document.getElementsByName("trueName")[0];
+            var college = document.getElementsByName("college")[0];
+            var phone = document.getElementsByName("phone")[0];
+            // 获取发布作业的input
+            var courseName = document.getElementsByName("courseName")[0];
+            var homeworkName = document.getElementsByName("homeworkName")[0];
+            var className = document.getElementsByName("className")[0];
+            var file = document.getElementsByName("file")[0];
+            var deadline = document.getElementsByName("deadline")[0];
+            var description1 = document.getElementsByName("description1")[0];
+            // 获取作业管理中的input
+            var searchinput = document.getElementsByName("searchinput")[0];
+
+            // 选择课程后自动修改作业名
+            publishselect1.onchange = function () {
+                homeworkName.value = "" + publishselect1.options[publishselect1.selectedIndex].innerHTML + "第一次作业";
+            }
+            homeworkName.onmouseover = function () {
+                homeworkName.style.backgroundColor = "rgb(230, 239, 245)";
+            }
+            homeworkName.onmouseout = function () {
+                homeworkName.style.backgroundColor = "rgb(255,255,255)";
+            }
+            homeworkName.onclick = function () {
+                homeworkName.style.outline = "none";
+            }
+            li[0].style.backgroundColor = "#ffe48d";
+
+
+            // 点击左侧导航条
+            for (var i = 0; i < li.length; i++) {
+                li[i].onclick = function () {
+                    for (var j = 0; j < li.length; j++) {
+                        li[j].style.backgroundColor = "";
+                        tables[j].style.display = "none";
+                    }
+                    this.style.backgroundColor = "#ffe48d";
+                    var index = this.className * 1;
+                    tables[index].style.display = "block";
+                    // 个人中心
+                    if (index == 0) {
+                        litip[0].innerHTML = "此页展示了基础用户信息";
+                        litip[1].innerHTML = "教师工号个人无法修改";
+                        radial.innerHTML = "您当前所在的位置：个人中心";
+                    }
+                    // 教授班级
+                    if (index == 1) {
+                        litip[0].innerHTML = "此页展示了您所教授的所有班级";
+                        litip[1].innerHTML = "可查看每次提交的作业情况";
+                        radial.innerHTML = "您当前所在的位置：教授班级";
+                    }
+                    // 教授课程
+                    if (index == 2) {
+                        litip[0].innerHTML = "此页展示了您所教授的课程";
+                        litip[1].innerHTML = "课程变更由后台导入";
+                        radial.innerHTML = "您当前所在的位置：教授课程";
+                    }
+                    // 发布作业
+                    if (index == 3) {
+                        litip[0].innerHTML = "您可在此页发布作业，文件发布为可选项，若有作业原始文件，可上传";
+                        litip[1].innerHTML = "选择课程名称后作业名会自动改变，您可手动输入此为第*次作业";
+                        radial.innerHTML = "您当前所在的位置：发布作业";
+                    }
+                    // 作业管理
+                    if (index == 4) {
+                        litip[0].innerHTML = "您可在此页查询学生上传的作业";
+                        litip[1].innerHTML = "一键下载可下载所有未下载的作业";
+                        radial.innerHTML = "您当前所在的位置：作业管理";
+                    }
+
+                }
+            }
+
+            // 是否审核通过，通过为绿色，未通过为红色
+            for (var i = 0; i < download.length; i++) {
+                // alert(auditStatus[i].innerHTML);
+                if (download[i].innerHTML == "已下载") {
+                    download[i].style.color = "rgb(85,202,125)";
+                }
+                else {
+                    download[i].style.color = "rgb(255,82,87)";
+                }
+            }
+
+
+
+            // 绑定按钮发送Ajax请求
+            // 个人中心的确认修改
+            btnPersonal.onclick = function () {
+                $.ajax({
+                    url: 'http:127.0.0.1:8000/server',
+                    data: {
+                        userName: userName.value,
+                        pwd: pwd.value,
+                        trueName: trueName.value,
+                        college: college.value,
+                        phone: phone.value
+
+                    },
+                    type: 'GET',
+                    // dataType: 'json',
+                    // 成功时的回调函数，data为响应体
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    // 失败时的
+                    error: function () {
+                        alert("您的网络似乎出现了一些问题，请稍后重试");
+                    }
+                });
+            }
+            // 发布作业的确认发布
+            btnPublish.onclick = function () {
+                $.ajax({
+                    url: 'http:127.0.0.1:8000/server',
+                    data: {
+                        courseName: courseName.value,
+                        homeworkName: homeworkName.value,
+                        className: className.value,
+                        file: file.value,
+                        deadline: deadline.value,
+                        description1: description1.value,
+                    },
+                    type: "GET",
+                    // 成功时的回调函数，data为响应体
+                    success: function (data) {
+
+                    },
+                    // 失败时的
+                    error: function () {
+                        alert("您的网络似乎出现了一些问题，请稍后重试");
+                    },
+
+
+                });
+            };
+            // 作业管理中的搜索按钮
+            btnSearch.onclick = function () {
+                $.ajax({
+                    url: 'http:127.0.0.1:8000/server',
+                    data: {
+                        searchinput: searchinput.value
+                    },
+                    type: "GET",
+                    // 成功时的回调函数，data为响应体
+                    success: function (data) {
+
+                    },
+                    // 失败时的
+                    error: function () {
+                        alert("您的网络似乎出现了一些问题，请稍后重试");
+                    },
+
+                });
+            };
+            // 作业管理中的一键下载
+            btnDownload.onclick = function () {
+            };
+        }
+
+
+
+
+
+
+    </script>
+</head>
+
+
+<body>
+    <iframe name="hidden" style="display:none;"></iframe>
+    <!-- 顶部 -->
+    <div class="top clearfix">
+        <h3>南京审计大学作业上传下载平台</h3>
+        <div class="up">
+            <a href="javascript:;" class="terminf clearfix">
+                <img src="./images/search.png" alt="">
+                <span>学期信息</span>
+            </a>
+            <!-- 此处跳转至登陆界面 -->
+            <a href="####" class="quit clearfix">
+                <img src="./images/cancel.png" alt="">
+                <span>安全退出</span>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- 内容区 -->
+    <div class="content">
+        <!-- 左侧导航栏 -->
+        <div class="nav">
+            <div class="tittle clearfix">
+                <div class="char">导航栏</div>
+            </div>
+            <ul>
+                <li class="0"><a href="javascript:;"><i class="fa fa-user"></i><span>个人中心</span></a></li>
+                <li class="1"><a href="javascript:;"><i class="fa fa-bookmark"></i><span>教授班级</span></a></li>
+                <li class="2"><a href="javascript:;"><i class=" fa fa-book"></i><span>教授课程</span></a></li>
+                <li class="3"><a href="javascript:;"><i class="fa fa-edit"></i><span>发布作业</span></a></li>
+                <li class="4"><a href="javascript:;"><i class="fa fa-download"></i><span>作业管理</span></a></li>
+
+            </ul>
+        </div>
+        <div class="main">
+            <div class="maintop">###你好，欢迎使用南京审计大学教学信息管理系统</div>
+            <!-- 切换页面 -->
+            <div class="zIndex">
+                <div class="radial">您当前所在的位置：个人中心</div>
+                <div class="tip">
+                    <ul>
+                        <img src="./images/tip.png" alt=""><span>重要提示 :</span>
+                        <li>此页展示了基础用户信息</li>
+                        <li>教师工号个人无法修改</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <!-- 个人中心 -->
+            <table class="personal">
+                <tr>
+                    <td class="tdleft">教师工号&nbsp;:</td>
+                    <td><input type="text" value="####" readonly style="background-color: rgb(231, 230, 230);"></td>
+                </tr>
+                <tr>
+                    <td class="tdleft">用户名&nbsp;:</td>
+                    <td><input type="text" name="userName" value="####"></td>
+                </tr>
+                <tr>
+                    <td class="tdleft">密码&nbsp;:</td>
+                    <td><input type="password" name="pwd" value="####"></td>
+                </tr>
+                <tr>
+                    <td class="tdleft">真实姓名&nbsp;:</td>
+                    <td><input type="text" name="trueName" value="####"></td>
+                </tr>
+                <tr>
+                    <td class="tdleft">所属学院&nbsp;:</td>
+                    <td><input type="text" name="college" value="####"></td>
+                </tr>
+                <tr>
+                    <td class="tdleft">联系方式&nbsp;:</td>
+                    <td><input type="text" name="phone" value="####"></td>
+
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="btnPersonal"><i class="fa fa-check"></i>保存修改</button></td>
+                </tr>
+            </table>
+
+            <!-- 教授班级 -->
+            <table class="classes" style="display:none;">
+                <tr>
+                    <td colspan="2" style="width:30px;font-weight: bold;">班级号</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="width:30px;font-weight: bold;">班级名</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="width:30px;font-weight: bold;">班级人数</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                </tr>
+                <tr>
+                    <td style="width:15px;height:120px;font-weight: bold;" rowspan="2">第一次作业</td>
+                    <td style="width:30px;font-weight: bold;">提交情况</td>
+                    <td>##/##</td>
+                    <td>##/##</td>
+                    <td>##/##</td>
+                    <td>##/##</td>
+                </tr>
+                <tr>
+                    <td style="width:30px;font-weight: bold;">平均分数</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                </tr>
+                <tr>
+                    <td style="width:15px;height:120px;font-weight: bold;" rowspan="2">第二次作业</td>
+                    <td style="width:30px;font-weight: bold;">提交情况</td>
+                    <td>##/##</td>
+                    <td>##/##</td>
+                    <td>##/##</td>
+                    <td>##/##</td>
+                </tr>
+                <tr>
+                    <td style="width:30px;font-weight: bold;">平均分数</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                    <td>####</td>
+                </tr>
+
+
+
+            </table>
+            <!-- 教授课程 -->
+            <table class="course" style="display:none;">
+                <tr>
+                    <td style="font-weight: bold;">序号</td>
+                    <td style="font-weight: bold;">课程名称</td>
+                    <td style="font-weight: bold;">学分</td>
+                    <td style="font-weight: bold;">开课时间</td>
+                    <td style="font-weight: bold;">教学班</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>《软工概论》</td>
+                    <td>3</td>
+                    <td>2020-09-07-2021-01-04</td>
+                    <td>软工一班，软工二班</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>《需求分析》</td>
+                    <td>3</td>
+                    <td>2020-09-07-2021-01-04</td>
+                    <td>软工一班，软工二班</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>《编译原理》</td>
+                    <td>3</td>
+                    <td>2020-09-07-2021-01-04</td>
+                    <td>软工一班，软工二班</td>
+                </tr>
+            </table>
+            <!-- 发布作业 -->
+            <table class="publish" style="display:none;">
+                <tr>
+                    <td style="font-weight: bold;">课程名称</td>
+                    <td>
+                        <select name="courseName" id="publishselect1"
+                            style="width: 289px;height: 31px;margin:5px 7px;box-sizing: border-box;">
+                            <option value="course1">####软件工程概论</option>
+                            <option value="course2">####需求分析</option>
+                            <option value="course3">####编译原理</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">作业名称</td>
+                    <td style="font-size: 18px;padding:0px;"><input id="homeworkName" type="text" name="homeworkName"
+                            value="软件工程概论第一次作业"
+                            style="margin:5px 7px;width:289px;height: 31px;font-size:13.33px;padding:4px;box-sizing: border-box;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">班级名称</td>
+                    <td>
+                        <select name="className" id="className" style="width: 289px;height: 31px;margin:5px 7px;">
+                            <option value="rg1">####软工一班</option>
+                            <option value="rg2">####软工二班</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <!-- 可多选 -->
+                    <td style="font-weight: bold;">文件发布</td>
+                    <td style="width: 300px;"><input type="file" id="input-file" name="file"
+                            style="margin:5px 7px;padding:2px 4px;width: 289px;height: 31px;font-size:13.33px; box-sizing: border-box;"
+                            multiple /> </td>
+
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">截止日期</td>
+                  
+                    <td><input name="deadline" class="date"
+                            style="padding:0 4px;width: 289px;height: 31px;margin:5px 7px;font-size:13.33px;box-sizing: border-box;"
+                            type="datetime-local" /></td>
+
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">作业描述</td>
+                    <td>
+                       
+                        <textarea name="description1"
+                            style="border-radius:5px;width: 276px;height: 200px;padding: 6px;padding-top:6px; margin:9px 0;font-size:13.33px;"></textarea>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit" class="btnPublish"><i class="fa fa-check"></i>确认发布</button>
+                    </td>
+                </tr>
+            </table>
+
+
+            <!-- 作业管理 -->
+            <!-- 其中的下载状态用已下载和未下载 -->
+            <table class="download" style="display:none;margin-right: 9px;">
+                <tr>
+                    <td colspan="9">
+                        <div style="padding: 10px; display:flex;  align-items: center;">
+                            <button style="margin-left:10px;margin-right: 750px;" class="btnDownload">一键下载</button>
+                            <input type="text" name="searchinput"
+                                style="margin-right: 18px;width: 300px;height: 30px;" />
+                            <button class="search btnSearch">查询</button>
+
+                        </div>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">学号</td>
+                    <td style="font-weight: bold;">姓名</td>
+                    <td style="font-weight: bold;">课程</td>
+                    <td style="font-weight: bold;">班级</td>
+                    <td style="font-weight: bold;">作业名</td>
+                    <td style="font-weight: bold;">作业号</td>
+                    <td style="font-weight: bold;">提交时间</td>
+                    <td style="font-weight: bold;">分数</td>
+                    <td style="font-weight: bold;">下载状态</td>
+                </tr>
+                <tr>
+                    <td>18109####</td>
+                    <td>张三####</td>
+                    <td>软件工程概论##</td>
+                    <td>软工一班##</td>
+                    <td>软工概论第一次作业##</td>
+                    <td>5##</td>
+                    <td>2020.09.##</td>
+                    <td>96##</td>
+                    <td class="download">已下载</td>
+
+                </tr>
+                <tr>
+                    <td>18109####</td>
+                    <td>张三####</td>
+                    <td>软件工程概论##</td>
+                    <td>软工一班##</td>
+                    <td>软工概论第一次作业##</td>
+                    <td>5##</td>
+                    <td>2020.09.##</td>
+                    <td>96##</td>
+                    <td class="download">已下载</td>
+
+                </tr>
+                <tr>
+                    <td>18109####</td>
+                    <td>张三####</td>
+                    <td>软件工程概论##</td>
+                    <td>软工一班##</td>
+                    <td>软工概论第一次作业##</td>
+                    <td>5##</td>
+                    <td>2020.09.##</td>
+                    <td>96##</td>
+                    <td class="download">已下载</td>
+
+                </tr>
+                <tr>
+                    <td>18109####</td>
+                    <td>张三####</td>
+                    <td>软件工程概论##</td>
+                    <td>软工一班##</td>
+                    <td>软工概论第一次作业##</td>
+                    <td>5##</td>
+                    <td>2020.09.##</td>
+                    <td>96##</td>
+                    <td class="download">已下载</td>
+
+                </tr>
+                <tr>
+                    <td>18109####</td>
+                    <td>张三####</td>
+                    <td>软件工程概论##</td>
+                    <td>软工一班##</td>
+                    <td>软工概论第一次作业##</td>
+                    <td>5##</td>
+                    <td>2020.09.##</td>
+                    <td>96##</td>
+                    <td class="download">未下载</td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- 页面底部 -->
+    <div class="loginfooter">
+        <div class="ul1">
+            <ul>
+                <li>版权所有：熊子洵小组</li>
+                <li>|</li>
+                <li>客服邮箱：2350869684@qq.com</li>
+                <li>|</li>
+                <li>客服电话：19825066321</li>
+                <li class="lastli">当前版本：1.00</li>
+
+            </ul>
+        </div>
+
+    </div>
+</body>
+
+</html>
