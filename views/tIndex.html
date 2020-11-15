@@ -498,54 +498,19 @@
                     <td class="download">已下载</td>
 
                 </tr>
+                <% for(var i=0;i<data.length;i++){ %>
                 <tr>
-                    <td>18109####</td>
+                    <td><%= data[i].sid %></td>
                     <td>张三####</td>
-                    <td>软件工程概论##</td>
+                    <td><%= data[i].cname %></td>
                     <td>软工一班##</td>
-                    <td>软工概论第一次作业##</td>
-                    <td>5##</td>
-                    <td>2020.09.##</td>
+                    <td><%= data[i].cname %></td>
+                    <td><%= data[i].hid %></td>
+                    <td><%= data[i].deadline %></td>
                     <td>96##</td>
-                    <td class="download">已下载</td>
-
+                    <td href='/connect/dload?id=<%=data[i].hid%>&stu=<%=data[i].sid%>' onclick="alert('请求发送成功')" class="download">已下载</td>
                 </tr>
-                <tr>
-                    <td>18109####</td>
-                    <td>张三####</td>
-                    <td>软件工程概论##</td>
-                    <td>软工一班##</td>
-                    <td>软工概论第一次作业##</td>
-                    <td>5##</td>
-                    <td>2020.09.##</td>
-                    <td>96##</td>
-                    <td class="download">已下载</td>
-
-                </tr>
-                <tr>
-                    <td>18109####</td>
-                    <td>张三####</td>
-                    <td>软件工程概论##</td>
-                    <td>软工一班##</td>
-                    <td>软工概论第一次作业##</td>
-                    <td>5##</td>
-                    <td>2020.09.##</td>
-                    <td>96##</td>
-                    <td class="download">已下载</td>
-
-                </tr>
-                <tr>
-                    <td>18109####</td>
-                    <td>张三####</td>
-                    <td>软件工程概论##</td>
-                    <td>软工一班##</td>
-                    <td>软工概论第一次作业##</td>
-                    <td>5##</td>
-                    <td>2020.09.##</td>
-                    <td>96##</td>
-                    <td class="download">未下载</td>
-
-                </tr>
+                <% } %>
             </table>
         </div>
     </div>
