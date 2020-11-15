@@ -52,6 +52,11 @@ router.get('/',(req, res)=>{
     
 })
 
+//发布作业
+router.get('/',(req, res)=>{
+    res.send('发布触发成功');
+})
+
 //字数统计api测试
 router.get('/test_count_doc',(req, res)=>{
 //     var raws = mammoth.extractRawText({path:"/var/ftp/pub/测试.docx"}).value;
