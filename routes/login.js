@@ -159,10 +159,10 @@ router.get('/tclogin',function(req,res){
 //                         });
                         
 //                     }
-//                 }
-                sqlConnect(sql,sqlArr,callBack)      
+// //                 }
+//                 sqlConnect(sql,sqlArr,callBack)      
 //              res.sendfile(path.join(__dirname,"../public/tIndex.html"))
-            res.render = ('tIndex',{
+            res.render('tIndex',{
                           curruser:curruser
                          }
             )
