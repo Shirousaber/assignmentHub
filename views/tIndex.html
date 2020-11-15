@@ -174,7 +174,7 @@
             // 发布作业的确认发布
             btnPublish.onclick = function () {
                 $.ajax({
-                    url: 'http:127.0.0.1:8000/server',
+                    url: 'http://139.224.221.116:3000/connect/publish',
                     data: {
                         courseName: courseName.value,
                         homeworkName: homeworkName.value,
@@ -199,7 +199,7 @@
             // 作业管理中的搜索按钮
             btnSearch.onclick = function () {
                 $.ajax({
-                    url: 'http:127.0.0.1:8000/server',
+                    url: 'http://139.224.221.116:3000/index/search',
                     data: {
                         searchinput: searchinput.value
                     },
