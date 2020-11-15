@@ -53,7 +53,7 @@ router.get('/',(req, res)=>{
 })
 
 //发布作业
-router.get('/',(req, res)=>{
+router.get('/publish',(req, res)=>{
     res.send('发布触发成功');
 })
 
