@@ -142,30 +142,25 @@ router.get('/tclogin',function(req,res){
                     conn.release();
                     })
                 }
-//                 var sql = "select * from class where tid = '"+curruser+"'";
-//                 var sqlArr = [];
-//                 var callBack = (err, data)=>{
-//                     if(err){
-//                         res.send('连接数据出错！');
-//                     }
-//                     if(data.length==0){
-//                         res.send('不存在相关的数据');
-//                     }
-//                     else{
-//                       res.render('tindex', { 
-//                           title: 'express&mysql测试',
-//                           data:data ,
-//                           user:curruser
-//                         });
-                        
-//                     }
-// //                 }
+                var sql = "select * from class where tid = '"+curruser+"'";
+                var sqlArr = [];
+                var callBack = (err, data)=>{
+                    if(err){
+                        res.send('连接数据出错！');
+                    }
+                    if(data.length==0){
+                        res.send('不存在相关的数据');
+                    }
+                    else{
+                      res.render('tIndex',{
+                          curruser:curruser,
+                          data:data
+                        });
+                    }
+                }
 //                 sqlConnect(sql,sqlArr,callBack)      
 //              res.sendfile(path.join(__dirname,"../public/tIndex.html"))
-            res.render('tIndex',{
-                          curruser:curruser
-                         }
-            )
+            
             //res.sendfile(path.join(__dirname,"../public/teacherd.html"))
         }
     })
