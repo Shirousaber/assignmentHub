@@ -129,11 +129,11 @@ router.post('/file_upload', function (req, res) {
           if (err) {
             console.log(err);
           } else {
-            cp.exec('libreoffice --headless --convert-to pdf --outdir '+des_file+' '+"/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf",function(err,stdout,stderr){
+            cp.exec('libreoffice --headless --convert-to pdf --outdir '+"/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf"+' '+des_file,function(err,stdout,stderr){
               if(err){
                   console.error(err);
               }
-              pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").then(buffer => { return console.log('success'); }).catch(err => {
+              pdftk.input("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").stamp("/var/ftp/pub/watermark/w1.pdf").output("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").then(buffer => { return console.log('success'); }).catch(err => {
                 console.error(err);
               });
               response = {
