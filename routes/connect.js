@@ -83,7 +83,8 @@ router.get('/test_count_doc',(req, res)=>{
 router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var stuid = req.query.stu;
-    res.download('/var/ftp/pub/'+id+'/'+stuid+'.pdf','D:/下载/'+stuid+'_'+id+'_copy.pdf',function(err){
+    var name = req.query.stu_name;
+    res.download('/var/ftp/pub/'+id+'/'+stuid+'_'+name+'.pdf','D:/下载/'+stuid+'_'+id+'_'+name+'_copy.pdf',function(err){
 	    if(err){
 		    console.log('远程不存在或者本地文件丢失');
 		    console.log(new Date());
