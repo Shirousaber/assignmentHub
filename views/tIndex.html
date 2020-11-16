@@ -186,7 +186,7 @@
                     type: "GET",
                     // 成功时的回调函数，data为响应体
                     success: function (data) {
-                        alert('成功!');
+                        alert('作业发布成功!');
                     },
                     // 失败时的
                     error: function () {
@@ -508,7 +508,7 @@
                     <td><%= data[i].hid %></td>
                     <td><%= data[i].deadline %></td>
                     <td>96##</td>
-                    <td href='/connect/dload?id=<%=data[i].hid%>&stu=<%=data[i].sid%>' onclick="alert('请求发送成功')" class="download">已下载</td>
+                    <td class="download"><a href='/connect/dload?id=<%=data[i].hid%>&stu=<%=data[i].sid%>' onclick="alert('请求发送成功')" >已下载</td>
                 </tr>
                 <% } %>
             </table>
