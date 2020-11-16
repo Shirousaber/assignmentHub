@@ -142,8 +142,7 @@ router.get('/tclogin',function(req,res){
                     conn.release();
                     })
                 }
-//                 var sql = "select * from class where tid = '"+curruser+"'";
-                var sql = "select sid,cname,hid,date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline,class.grade as grade,name from class left join homework_updated on class.cid=homework_updated.cid  left join suser on class.sid=suser.stid where tid = '"+curruser+"'";
+                var sqlb = "select * from tuser where tid='"+name+"' and psd='"+pwd+"'";
                 var sqlArr = [];
                 var callBack = (err, data)=>{
                     if(err){
@@ -153,13 +152,46 @@ router.get('/tclogin',function(req,res){
                         res.send('不存在相关的数据');
                     }
                     else{
-                      res.render('tIndex',{
-                          curruser:curruser,
-                          data:data
-                        });
+                      var sql = "select sid,cname,hid,date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline,class.grade as grade,name from class left join homework_updated on class.cid=homework_updated.cid  left join suser on class.sid=suser.stid where tid = '"+curruser+"'";
+                        var sqlArr = [];
+                        var name = data.tname;
+                        console.log(name);
+                        var callBack = (err, data)=>{
+                            if(err){
+                                res.send('连接数据出错！');
+                            }
+                            if(data.length==0){
+                                res.send('不存在相关的数据');
+                            }
+                            else{
+                              res.render('tIndex',{
+                                  curruser:curruser,
+                                  
+                                  data:data
+                                });
+                            }
+                        }
+                        sqlConnect(sql,sqlArr,callBack) 
                     }
                 }
-                sqlConnect(sql,sqlArr,callBack)      
+//                 var sql = "select * from class where tid = '"+curruser+"'";
+//                 var sql = "select sid,cname,hid,date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline,class.grade as grade,name from class left join homework_updated on class.cid=homework_updated.cid  left join suser on class.sid=suser.stid where tid = '"+curruser+"'";
+//                 var sqlArr = [];
+//                 var callBack = (err, data)=>{
+//                     if(err){
+//                         res.send('连接数据出错！');
+//                     }
+//                     if(data.length==0){
+//                         res.send('不存在相关的数据');
+//                     }
+//                     else{
+//                       res.render('tIndex',{
+//                           curruser:curruser,
+//                           data:data
+//                         });
+//                     }
+//                 }
+                sqlConnect(sqlb,sqlArr,callBack)      
 //              res.sendfile(path.join(__dirname,"../public/tIndex.html"))
             
             //res.sendfile(path.join(__dirname,"../public/teacherd.html"))
