@@ -158,7 +158,7 @@ router.post('/file_upload', function (req, res) {
                   filename: req.files[0].originalname,
                   count: my_cnt
                 };
-                SQLupdate(10, my_cnt);
+                SQLupdate(1, my_cnt);
                 console.log(response);
                 res.end(JSON.stringify(response));
               });
