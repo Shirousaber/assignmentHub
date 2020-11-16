@@ -137,7 +137,7 @@ router.get('/tclogin',function(req,res){
                         res.send('连接数据出错！');
                         
                     }
-                    setTimeout(function(){conn.query(sql,sqlArr,callBack)},1000)
+                    setTimeout(function(){conn.query(sql,sqlArr,callBack)},10)
                     
                     conn.release();
                     })
@@ -154,7 +154,7 @@ router.get('/tclogin',function(req,res){
                     else{
                       var sql = "select sid,cname,hid,date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline,class.grade as grade,name from class left join homework_updated on class.cid=homework_updated.cid  left join suser on class.sid=suser.stid where tid = '"+curruser+"'";
                         var sqlArr = [];
-                        var name = data.tname;
+                        var name = data[0].tname;
                         console.log(name);
                         var callBack = (err, data)=>{
                             if(err){
