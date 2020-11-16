@@ -25,6 +25,8 @@ body{
 
 /* 头部 */
 .top{
+    position: fixed;
+    z-index: 999;
     width:100vw;
     height:40px;
     background-color: rgb(64, 128, 128);
@@ -86,7 +88,7 @@ body{
 }
 .content>div{
     /* float:left; */
-    height: 702px;
+    
     /* height: 47vw; */
 }
 
@@ -95,8 +97,13 @@ body{
 
 /* 左侧导航 */
 .nav{
+    position:fixed;
+    z-index: 999;
+    background-color: #fff;
+    top:40px;
     flex:none;
     width:175px;
+    bottom:50px;
     border-right:4px solid  #E0ECFF;
 }
 .nav .tittle{
@@ -104,6 +111,7 @@ body{
     height: 32px;
     font-weight: bold;
     border:1px solid rgb(149, 184, 231);
+    border-right:none;
 }
 .nav .tittle .char{
     margin-top:5px;
@@ -152,6 +160,10 @@ body{
 
 /* 主要内容区 */
 .main{
+    position: fixed;
+    z-index: 999;
+    top:40px;
+    left:179px;
     width: 1356px;
     border-left:1px solid rgb(149, 184, 231) ;
     overflow: hidden;
@@ -162,6 +174,8 @@ body{
     line-height: 32px;
     padding-left: 5px;
     font-weight: bold;
+    border-top:1px solid rgb(149, 184, 231);
+    border-left:1px solid rgb(149, 184, 231) ;
 
 
 }
@@ -179,7 +193,8 @@ body{
     padding-left: 5px;
 }
 .main .tip ul {
-    margin:7px;
+    margin:7px;margin:0 7px ;
+    margin-bottom: 0;
     background-color: #fafaf1;
     border: 1px solid #E0E0E0;
 
