@@ -72,6 +72,16 @@
             var description1 = document.getElementsByName("description1")[0];
             // 获取作业管理中的input
             var searchinput = document.getElementsByName("searchinput")[0];
+            
+            
+            // 获取页面大小并随窗口大小变化而改变
+            var width=document.body.clientWidth;
+            var main=document.getElementsByClassName("main")[0];
+            var tip=document.getElementsByClassName("tip")[0];
+            main.style.width=width-50+"px";
+            window.onresize=function(){
+                main.style.width=width-50+"px";
+            }
 
             // 选择课程后自动修改作业名
             publishselect1.onchange = function () {
