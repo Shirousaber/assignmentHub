@@ -37,11 +37,11 @@ function SQLupdate(cid, cnt){
 	    day = "0" + day;
 	 }
 	 var s_createtime = year + '-' + month + '-' + day + ' ' + Hours + ':' + Minutes + ':' + Seconds;
-	var paras = [rid, my_cid,s_createtime, cnt]
-	var query1 = 'insert into homework_updated (rid,cid,updatetime,cnt) values(?,?,?,?)';
+	var paras = [my_cid,s_createtime, cnt]
+	var query1 = 'insert into homework_updated (cid,updatetime,cnt) values(?,?,?)';
 	connection.query(query1,paras,function(err,result){
 	    if(err) throw err;
-	    console.log("***")
+	    console.log("***");
 	    
 	    })
 
