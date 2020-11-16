@@ -143,7 +143,7 @@ router.get('/tclogin',function(req,res){
                     })
                 }
 //                 var sql = "select * from class where tid = '"+curruser+"'";
-                var sql = "select * from class left join homework_updated on class.cid=homework_updated.cid  where tid = '"+curruser+"'";
+                var sql = "select sid,cname,hid,deadline,class.grade as grade from class left join homework_updated on class.cid=homework_updated.cid  left join suser on class.sid=suser.stid where tid = '"+curruser+"'";
                 var sqlArr = [];
                 var callBack = (err, data)=>{
                     if(err){
