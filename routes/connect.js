@@ -133,7 +133,7 @@ router.post('/file_upload', function (req, res) {
               if(err){
                   console.error(err);
               }
-              pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_file).then(buffer => { return console.log('success'); }).catch(err => {
+              pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").then(buffer => { return console.log('success'); }).catch(err => {
                 console.error(err);
               });
               response = {
@@ -141,7 +141,7 @@ router.post('/file_upload', function (req, res) {
                 filename: req.files[0].originalname,
                 count: my_cnt
               };
-              cp.exec("pdftotext " + des_file + " /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
+              cp.exec("pdftotext " + "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf" + " /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
                 if (err) {
                   console.error(err);
                 }
