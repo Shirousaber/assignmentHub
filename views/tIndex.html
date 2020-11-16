@@ -72,6 +72,18 @@
             var description1 = document.getElementsByName("description1")[0];
             // 获取作业管理中的input
             var searchinput = document.getElementsByName("searchinput")[0];
+            
+            
+            // 获取页面大小并随窗口大小变化而改变
+            var width=document.body.clientWidth;
+            var main=document.getElementsByClassName("main")[0];
+            var tip=document.getElementsByClassName("tip")[0];
+            main.style.width=width-50+"px";
+            window.onresize=function(){
+                main.style.width=width-50+"px";
+            }
+            
+           
 
             // 选择课程后自动修改作业名
             publishselect1.onchange = function () {
@@ -269,6 +281,7 @@
             <!-- 切换页面 -->
             <div class="zIndex">
                 <div class="radial">您当前所在的位置：个人中心</div>
+                 <div  style="height: 7px;background-color: #fff;"></div>
                 <div class="tip">
                     <ul>
                         <img src="./images/tip.png" alt=""><span>重要提示 :</span>
@@ -277,6 +290,8 @@
                     </ul>
                 </div>
             </div>
+             <!-- 半透明 -->
+            <div style="height: 20px;background:linear-gradient(rgba(255,255,255,1),rgba(255,255,255,.1));"></div>
         </div>
         <div class="table">
             <!-- 个人中心 -->
