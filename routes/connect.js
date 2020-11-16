@@ -22,7 +22,7 @@ var connection = myql.createConnection(
 
 function SQLupdate(cid, cnt){
 	var my_cid=cid;
-	var rid = 999;
+	var rid = 55;
 	var date = new Date();
 	var year = date.getFullYear();
 	var month = date.getMonth() + 1;
