@@ -83,7 +83,8 @@ router.get('/test_count_doc',(req, res)=>{
 router.get('/dload',(req, res)=>{
     var id = req.query.id;
     var stuid = req.query.stu;
-    var name = req.query.stu_name;
+//     var name = req.query.stu_name;
+    var name = '熊子洵';
     console.log('/var/ftp/pub/'+id+'/'+stuid+'_'+name+'.pdf');
     res.download('/var/ftp/pub/'+id+'/'+stuid+'_'+name+'.pdf','D:/下载/'+stuid+'_'+id+'_'+name+'_copy.pdf',function(err){
 	    if(err){
