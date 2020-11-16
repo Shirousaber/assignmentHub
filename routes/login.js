@@ -155,6 +155,7 @@ router.get('/tclogin',function(req,res){
                       var sql = "select sid,cname,hid,date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline,class.grade as grade,name from class left join homework_updated on class.cid=homework_updated.cid  left join suser on class.sid=suser.stid where tid = '"+curruser+"'";
                         var sqlArr = [];
                         var name = data[0].tname;
+                        var school = data[0].school
                         console.log(name);
                         var callBack = (err, data)=>{
                             if(err){
@@ -166,7 +167,8 @@ router.get('/tclogin',function(req,res){
                             else{
                               res.render('tIndex',{
                                   curruser:curruser,
-                                  
+                                  name:name,
+                                  school:school,
                                   data:data
                                 });
                             }
