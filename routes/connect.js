@@ -87,7 +87,7 @@ router.get('/dload', (req, res) => {
   var stuid = req.query.stu;
   //     var name = req.query.stu_name;
   var name = '熊子洵';
-  console.log('/var/ftp/pub/' + id + '/' + stuid + '_' + name + '.pdf');
+  console.log('/var/ftp/pub/' + id + '/' + stuid + '_' + name + '.pdf/'+stuid + '_' + name + '.pdf');
   res.download('/var/ftp/pub/' + id + '/' + stuid + '_' + name + '.pdf', 'D:/下载/' + stuid + '_' + id + '_' + name + '_copy.pdf', function (err) {
     if (err) {
       console.log('远程不存在或者本地文件丢失');
