@@ -335,7 +335,7 @@ router.get('/search',function(req,res){
 
 //学生登录测试
 router.get('/test_stu',function(req,res){
-    res.sendfile(path.join(__dirname,"../public/tIndex.html"))
+    res.render('index11')
 })
 
 module.exports = router;
