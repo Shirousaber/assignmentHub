@@ -129,7 +129,7 @@ router.post('/file_upload', function (req, res) {
           if (err) {
             console.log(err);
           } else {
-            cp.exec('libreoffice --headless --convert-to pdf --outdir '+"/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf"+' '+des_file,function(err,stdout,stderr){
+            cp.exec('libreoffice --headless --convert-to pdf --outdir '+des_file+' '+"/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf",function(err,stdout,stderr){
               if(err){
                   console.error(err);
               }
