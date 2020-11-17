@@ -87,8 +87,8 @@ router.get('/dload', (req, res) => {
   var stuid = req.query.stu;
   //     var name = req.query.stu_name;
   var name = '熊子洵';
-  console.log('/var/ftp/pub/' + id + '/' + stuid + '_' + name + '.pdf/'+stuid + '_' + name + '.pdf');
-  res.download('/var/ftp/pub/' + id + '/' + stuid + '_' + name + '.pdf/'+stuid + '_' + name + '.pdf', 'D:/下载/' + stuid + '_' + id + '_' + name + '_copy.pdf', function (err) {
+  console.log('/var/ftp/pub/' + id + '/' + stuid + '_' + name + '.pdf');
+  res.download('/var/ftp/pub/' + id + '/' + stuid + '_' + name + '.pdf', 'D:/下载/' + stuid + '_' + id + '_' + name + '_copy.pdf', function (err) {
     if (err) {
       console.log('远程不存在或者本地文件丢失');
       console.log(new Date());
@@ -118,7 +118,9 @@ router.post('/file_upload', function (req, res) {
   console.log('学生姓名:' + myname);
   console.log('文件后缀:' + mylas);
   var des_file = "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".doc"; //文件名
+  var des_2 = "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf";
   console.log('目标地址: ' + des_file);
+  console.log('pdf地址:'+des_2);
   fs.exists("/var/ftp/pub/" + myid, function (exists) {
     var my_cnt = "0";
     if (exists) {
@@ -129,11 +131,11 @@ router.post('/file_upload', function (req, res) {
           if (err) {
             console.log(err);
           } else {
-            cp.exec('libreoffice --headless --convert-to pdf --outdir '+des_file+' '+"/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf",function(err,stdout,stderr){
+            cp.exec('libreoffice --headless --convert-to pdf --outdir '+des_2+' '+des_file,function(err,stdout,stderr){
               if(err){
                   console.error(err);
               }
-              pdftk.input("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").stamp("/var/ftp/pub/watermark/w1.pdf").output("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").then(buffer => { return console.log('success'); }).catch(err => {
+              pdftk.input(des_2).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_2).then(buffer => { return console.log('success'); }).catch(err => {
                 console.error(err);
               });
               response = {
@@ -141,7 +143,7 @@ router.post('/file_upload', function (req, res) {
                 filename: req.files[0].originalname,
                 count: my_cnt
               };
-              cp.exec("pdftotext " + "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf" + " /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
+              cp.exec("pdftotext " + des_2 + " /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
                 if (err) {
                   console.error(err);
                 }
