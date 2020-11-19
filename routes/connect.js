@@ -154,13 +154,15 @@ router.post('/file_upload', function (req, res) {
                       console.error(err);
                   }
                   else{
-                      data=data.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,""); 
+                      var str =data.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,""); 
                       fs.writeFile('/var/ftp/pub/temp.txt', data, function (err){
                         cp.exec("echo |wc -c /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
                           if (err) {
                             console.error(err);
                           }
-                          my_cnt = stdout.trim().split(" ")[0];
+//                           my_cnt = stdout.trim().split(" ")[0];
+                          var re = '/[\u4E00-\u9FA5]/g'; 
+                          my_cnt = str.match(re).length; 
           //                 var temp_cnt = parseInt(my_cnt);
           //                 my_cnt = ""+temp_cnt;
                           console.log('共计:' + my_cnt);
