@@ -136,7 +136,7 @@ router.post('/file_upload', function (req, res) {
               if(err){
                   console.error(err);
               }
-              pdftk.input(des_2).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_2).then(buffer => { return console.log('success'); }).catch(err => {
+              pdftk.input("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").stamp("/var/ftp/pub/watermark/w1.pdf").output("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").then(buffer => { return console.log('success'); }).catch(err => {
                 console.error(err);
               });
               response = {
