@@ -149,24 +149,34 @@ router.post('/file_upload', function (req, res) {
                   console.error(err);
                 }
               });
-  
-              cp.exec("echo |wc -c /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
-                if (err) {
-                  console.error(err);
-                }
-                my_cnt = stdout.trim().split(" ")[0];
-//                 var temp_cnt = parseInt(my_cnt);
-//                 my_cnt = ""+temp_cnt;
-                console.log('共计:' + my_cnt);
-                response = {
-                  message: 'File uploaded successfully',
-                  filename: req.files[0].originalname,
-                  count: my_cnt
-                };
-                SQLupdate(1, my_cnt);
-                console.log(response);
-                res.end(JSON.stringify(response));
+              fs.readFile('/var/ftp/pub/temp.txt','utf-8',function(err,data){
+                  if(err){
+                      console.error(err);
+                  }
+                  else{
+                      data=data.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,""); 
+                      fs.writeFile('/var/ftp/pub/temp.txt', data, function (err){
+                        cp.exec("echo |wc -c /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
+                          if (err) {
+                            console.error(err);
+                          }
+                          my_cnt = stdout.trim().split(" ")[0];
+          //                 var temp_cnt = parseInt(my_cnt);
+          //                 my_cnt = ""+temp_cnt;
+                          console.log('共计:' + my_cnt);
+                          response = {
+                            message: 'File uploaded successfully',
+                            filename: req.files[0].originalname,
+                            count: my_cnt
+                          };
+                          SQLupdate(1, my_cnt);
+                          console.log(response);
+                          res.end(JSON.stringify(response));
+                        });
+                      })
+                  }
               });
+              
   
           });
             
