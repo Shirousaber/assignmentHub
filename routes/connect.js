@@ -118,7 +118,7 @@ router.post('/file_upload', function (req, res) {
   console.log('学生姓名:' + myname);
   console.log('文件后缀:' + mylas);
   var des_file = "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".doc"; //文件名
-  var des_2 = "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf";
+  var des_2 = "/var/ftp/pub/" + myid ;
   console.log('目标地址: ' + des_file);
   console.log('pdf地址:'+des_2);
   fs.exists("/var/ftp/pub/" + myid, function (exists) {
