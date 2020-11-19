@@ -70,7 +70,7 @@ router.get('/test_count_doc', (req, res) => {
       console.error(err);
     }
   });
-  cp.exec("echo |wc -c /var/ftp/pub/5/181090901_赵强.txt", function (err, stdout, stderr) {
+  cp.exec("echo |wc -m /var/ftp/pub/5/181090901_赵强.txt", function (err, stdout, stderr) {
     if (err) {
       console.error(err);
     }
