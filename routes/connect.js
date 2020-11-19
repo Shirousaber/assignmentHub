@@ -155,18 +155,8 @@ router.post('/file_upload', function (req, res) {
                   }
                   else{
                       var re = /[\u4E00-\u9FA5]/g; 
-                      var my_cnt2 = data.match(re).length;
-                      console.log(my_cnt2);
-                      fs.writeFile('/var/ftp/pub/temp.txt', data, function (err){
-                        cp.exec("echo |wc -c /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
-                          if (err) {
-                            console.error(err);
-                          }
-                          my_cnt = stdout.trim().split(" ")[0];
-                          
-          //                 var temp_cnt = parseInt(my_cnt);
-          //                 my_cnt = ""+temp_cnt;
-                          console.log('共计:' + my_cnt);
+                      var my_cnt = data.match(re).length;
+                      console.log('共计:' + my_cnt);
                           response = {
                             message: 'File uploaded successfully',
                             filename: req.files[0].originalname,
@@ -175,8 +165,6 @@ router.post('/file_upload', function (req, res) {
                           SQLupdate(1, my_cnt);
                           console.log(response);
                           res.end(JSON.stringify(response));
-                        });
-                      })
                   }
               });
               
