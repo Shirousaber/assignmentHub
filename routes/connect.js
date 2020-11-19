@@ -150,7 +150,7 @@ router.post('/file_upload', function (req, res) {
                 }
               });
   
-              cp.exec("echo |wc -m /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
+              cp.exec("echo |wc -c /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
                 if (err) {
                   console.error(err);
                 }
@@ -204,7 +204,7 @@ router.post('/file_upload', function (req, res) {
                   }
                 });
 
-                cp.exec("echo |wc -m /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
+                cp.exec("echo |wc -c /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
                   if (err) {
                     console.error(err);
                   }
