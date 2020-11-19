@@ -131,6 +131,7 @@ router.post('/file_upload', function (req, res) {
           if (err) {
             console.log(err);
           } else {
+            console.log('libreoffice --headless --convert-to pdf '+des_file+' --outdir '+des_2)
             cp.exec('libreoffice --headless --convert-to pdf '+des_file+' --outdir '+des_2,function(err,stdout,stderr){
               if(err){
                   console.error(err);
