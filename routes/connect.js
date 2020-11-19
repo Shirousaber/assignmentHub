@@ -155,6 +155,8 @@ router.post('/file_upload', function (req, res) {
                   console.error(err);
                 }
                 my_cnt = stdout.trim().split(" ")[0];
+                var temp_cnt = parseInt(my_cnt)-6;
+                my_cnt = temp_cnt.toString;
                 console.log('共计:' + my_cnt);
                 response = {
                   message: 'File uploaded successfully',
