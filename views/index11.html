@@ -7,10 +7,11 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="shortcut icon" href="/images/logo2.png" type="image/x-icon">
 	<link rel="shortcut icon" href="../public/images/logo2.png" type="image/x-icon">
-	<title>作业上传下载平台</title>
-	<title><%= title %></title>
+	<title>学生界面</title>
 	<link rel="stylesheet" href="/css/index11.css">
 	<link rel="stylesheet" href="../public/css/index11.css">
+	<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.css" rel="stylesheet">
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		window.onload = function () {
 			// 有关时间
@@ -29,15 +30,20 @@
 			var date1 = "" + year + "-" + month + "-" + day;
 			// 判断截止日期
 			var s_createtime = "" + year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-
-
-
-
+			
 
 			// 导航条
 			var nav = document.getElementsByClassName("nav")[0];
 			var li = nav.getElementsByTagName("li");
 			var table = document.getElementsByTagName("table");
+			var tr0=table[0].getElementsByTagName("tr")[0];
+			var tr1=table[1].getElementsByTagName("tr")[0];
+			var tr2=table[2].getElementsByTagName("tr")[0];
+			var tr3=table[3].getElementsByTagName("tr")[0];
+			var tr=new Array();
+			tr[0]=table[0].getElementsByTagName("tr")[1];
+			table[0].width=tr[0].clientWidth+"px";
+	
 			// 点击导航条
 			for (var i = 0; i < li.length; i++) {
 				li[i].onclick = function () {
@@ -48,9 +54,12 @@
 
 					}
 					// this.style.backgroundColor = "rgba(49, 203, 100, 1);";
-					this.className += " click";
 					var index = this.id * 1;
+					tr[index]=table[index].getElementsByTagName("tr")[1];
+					this.className += " click";
+					
 					table[index].style.display = "block";
+					table[index].width = tr[index].clientWidth+"px";
 
 
 				}
@@ -78,10 +87,11 @@
 		<div class="nav">
 			<ul class="nav">
 
-				<li id="0" class="li1 click"><a href="#">未提交</a></li>
-				<li id="1" class="li2"><a href="#">已提交</a></li>
-				<li id="2" class="li3"><a href="#">我的班级</a></li>
-				<li id="3" class="li4"><a href="#">个人中心</a></li>
+				<li id="0" class="li1 click"><a href="#"><i class="fa fa-edit"></i>未提交</a></li>
+				<li id="1" class="li2"><a href="#"><i class="fa fa-download"></i>已提交</a></li>
+				<li id="2" class="li3"><a href="#"><i class="fa fa-bookmark"></i>我的班级</a></li>
+				<li id="3" class="li4"><a href="#"><i class="fa fa-user"></i>个人中心</a></li>
+			
 			</ul>
 
 		</div>
@@ -91,10 +101,10 @@
 	<!-- 内容区 -->
 	<div class="content">
 		<!-- 未提交 -->
-		<table style="display:block;width: 989px;">
+		<table style="display:block;" class="table0">
 			<tr class="th">
 				<th class="th1">课程</th>
-				<th class="th2">班级</th>
+				<th class="th2">班级号</th>
 				<th class="th3">作业名</th>
 				<th class="th4" style="width:100px;">作业号</th>
 				<th class="th5">截止日期</th>
@@ -103,35 +113,35 @@
 			</tr>
 			<tr>
 				<td>##软件工程</td>
-				<td>##软件一班</td>
+				<td>SJ111</td>
 				<td>##软工概论第一次作业</td>
 				<td>5#</td>
 				<td style="font-size: 16px;">2020-12-03 21:00</td>
 				
 				<td><a href="">上传</a></td>
 			</tr>
+			
 
 
 		</table>
 		<!-- 已提交 -->
-		<table style="display:none;width: 989px;">
+		<table style="display:none;" class="table1">
 			<tr class="th">
 				<th class="th1">课程</th>
-				<th class="th2">班级</th>
+				<th class="th2">班级号</th>
 				<th class="th3">作业名</th>
-				<th class="th4" style="width:100px;">作业号</th>
-				<!-- <th class="th5">截止日期</th> -->
-				<th class="th5" style="width: 170px;">重新上传</th>
+				<th class="th4" style="width: 170px;">重新上传</th>
+				<th class="th5" style="width: 100px;">下载</th>
 				<th class="th6" style="width: 138px;">评分</th>
 				
 
 			</tr>
 			<tr>
 				<td>##软件工程</td>
-				<td>##软件一班</td>
+				<td>##SJ111</td>
 				<td>##软工概论第一次作业</td>
-				<td>5#</td>
 				<td><a href="">上传</a></td>
+				<td><a href="">下载</a></td>
 
 				<!-- <td style="font-size: 16px;">2020-12-03 21:00</td> -->
 				
@@ -142,15 +152,17 @@
 		</table>
 
 		<!-- 我的班级 -->
-		<table style="display:none;width: 650px;">
+		<table style="display:none;" class="table2">
 			<tr>
 				<th class="th1" style="width: 260px;">课程</th>
-				<th class="th2" style="width: 170px;">班级</th>
+				<th class="th2" style="width: 170px;">班级号</th>
+				<th class="th2" style="width: 170px;">平均分</th>
 				<th class="th3" style="width: 220px;">我的排名</th>
 			</tr>
 			<tr>
 				<td>C语言程序设计</td>
-				<td>软工二班</td>
+				<td>SJ111</td>
+				<td>89</td>
 				<td>12/32</td>
 			</tr>
 		</table>
@@ -162,7 +174,7 @@
 
 
 		<!-- 个人中心 -->
-		<table style="display:none;width: 572px;margin-bottom: 0;">
+		<table style="display:none;margin-bottom: 0;" class="table3">
 			<tr>
 				<td style="width: 170px;border:none;border-right: 2px rgba(71, 71, 70, 0.5) solid;">学号&nbsp;:</td>
 				<td class="th4" style="width: 400px;border:none;">##181090917</td>
