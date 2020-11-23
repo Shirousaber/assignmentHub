@@ -28,20 +28,25 @@ body{
 .nav{
     position: fixed;
     top: 0;
-    border-radius:0 0px 30px 0; 
+    border-radius:0 0px 15px 0; 
     list-style: none;
-    background-color: rgba(69, 223, 120, 0.8);
     width:200px;
-    float:left;
+    box-sizing: border-box;
+  
 }
 
 .nav a{
 
     text-decoration: none;
-    color:white;
+    color: rgb(184,199,206);
     display:block;
-    text-align: center;
+    box-sizing: border-box;
     font-weight: bold;
+    float:left;
+    padding-left: 40px;
+}
+.nav a:hover{
+    color:white;
 }
 .nav li{
     height:70px;
@@ -52,12 +57,23 @@ body{
 }
 .nav li:hover,
 .nav .click{
-    background-color:  rgb(57, 238, 118);
+    /* background-color:  rgb(57, 238, 118); */
+    background-color:  rgba(198, 153, 148, 0.29);
+    
+}
+.nav .click a,
+.nav li:hover a{
+    color:rgb(255, 252, 100);
 }
 .nav .li4:hover,
 .nav .li4.click{
-    background-color:  rgb(57, 238, 118);
-    border-radius:0 0px 30px 0; 
+    /* background-color:  rgb(57, 238, 118); */
+    background-color:  rgba(198, 153, 148, 0.29);
+    border-radius:0 0px 15px 0; 
+}
+i{
+    font-size:20px;
+    padding-right: 10px;
 }
 
 
@@ -76,7 +92,7 @@ body{
 }
 .content table {
     box-shadow: 0px 0px 30px #303030; 
-    border-radius: 35px 35px 0 0;
+    border-radius: 15px 15px 0 0;
     margin-bottom:200px;
     border-collapse: collapse;
     font-size: 24px;
@@ -93,11 +109,13 @@ tr{
     width: 100%;
 }
 
+
 td{
    
     border:2px rgba(71, 71, 70, 0.5) solid; 
     text-align: center;
     padding: 8px;
+    padding: 8px 21px;
 }
 .th2,.th3,.th4,.th5,.th6{
     border-left:2px rgba(71, 71, 70, 0.5) solid;
