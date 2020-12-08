@@ -88,7 +88,7 @@ router.get('/dload', (req, res) => {
   var stuname = req.query.stu_name;
   //     var name = req.query.stu_name;
   console.log('/var/ftp/pub/' + id + '/' + stuid + '_' + stuname + '.pdf');
-  res.download('/var/ftp/pub/' + id + '/' + stuid + '_' + stuname + '.pdf', 'D:/' + stuid + '_' +id+'_' stuname + '_local.pdf', function (err) {
+  res.download('/var/ftp/pub/' + id + '/' + stuid + '_' + stuname + '.pdf', 'D:/' + stuid + '_' +id+'_' +stuname + '_local.pdf', function (err) {
     if (err) {
       console.log('远程不存在或者本地文件丢失');
       console.log(new Date());
