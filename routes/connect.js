@@ -107,14 +107,16 @@ router.post('/file_upload', function (req, res) {
   console.log('进入了函数')
   console.log(req.files[0]);  // 上传的文件信息
   var tempfilename = req.files[0].originalname;
-  var mysid = tempfilename.split("_")[0];
-  var myid = tempfilename.split("_")[1];
-  var myfile = tempfilename.split("_")[2];
-  var myname = myfile.split(".")[0];
-  var mylas = myfile.split(".")[1];
+  var mysid = tempfilename.split("_")[0];//学号
+  var myid = tempfilename.split("_")[1];//作业号
+  var myhid =  tempfilename.split("_")[2];//我的作业唯一标识
+  var myfile = tempfilename.split("_")[3];//剩余部分
+  var myname = myfile.split(".")[0];//我的姓名
+  var mylas = myfile.split(".")[1];//文件尾缀
 
   console.log('学号:' + mysid);
-  console.log('作业id号码:' + myid);
+  console.log('作业号: '+myid);
+  console.log('学生-作业唯一表示:' + myhid);
   console.log('学生姓名:' + myname);
   console.log('文件后缀:' + mylas);
   var des_file = "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".docx"; //文件名
@@ -162,7 +164,7 @@ router.post('/file_upload', function (req, res) {
                             filename: req.files[0].originalname,
                             count: my_cnt
                           };
-                          SQLupdate(1, my_cnt);
+                          SQLupdate(myhid, my_cnt);
                           console.log(response);
                           res.end(JSON.stringify(response));
                   }
