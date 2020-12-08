@@ -238,7 +238,7 @@ router.get('/stulogin',function(req,res){
                     conn.release();
                     })
                 }
-                var sql = "select date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline, tid, cname, hid from class where sid = '"+curruser+"'";
+                var sql = "select date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline, tid, cname, hid, cid from class where sid = '"+curruser+"'";
                 var sqlArr = [];
                 var callBack = (err, data)=>{
                     if(err){
