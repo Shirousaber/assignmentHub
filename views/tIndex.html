@@ -516,7 +516,7 @@
                 </tr> -->
                 <% for(var i=0;i<data.length;i++){ %>
                 <tr>
-                    <td><%= data[i].sid %></td>
+                    <td><%=data[i].sname%></td>
                     <td><%= data[i].name %></td>
                     <td><%= data[i].cname %></td>
                     <td>软工一班##</td>
@@ -524,7 +524,7 @@
                     <td><%= data[i].hid %></td>
                     <td><%= data[i].deadline %></td>
                     <td>96##</td>
-                    <td ><a href='/connect/dload?id=<%=data[i].hid%>&stu=<%=data[i].sid%>&stu_name=张三' onclick="alert('请求发送成功')" class="download">已下载<a/></td>
+                    <td ><a href='/connect/dload?id=<%=data[i].hid%>&stu=<%=data[i].sid%>&stu_name=<%=data[i].sname%>' onclick="alert('请求发送成功')" class="download">已下载<a/></td>
                 </tr>
                 <% } %>
             </table>
