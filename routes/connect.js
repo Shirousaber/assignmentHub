@@ -50,7 +50,10 @@ function SQLupdate(cid, cnt) {
 }
 
 router.get('/', (req, res) => {
-  res.render('upload');
+  var my_file_name = req.query.my_file_name;
+  res.render('upload',{
+     my_file_name:my_file_name
+    });
 
 })
 
