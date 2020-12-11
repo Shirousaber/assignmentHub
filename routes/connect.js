@@ -88,7 +88,7 @@ router.get('/dload', (req, res) => {
   var stuname = req.query.stu_name;
   //     var name = req.query.stu_name;
   console.log('/var/ftp/pub/' + id + '/' + stuid + '_' + stuname + '.pdf');
-  res.download('/var/ftp/pub/' + id + '/' + stuid + '_' + stuname + '.pdf', 'D:/' + stuid + '_' +id+'_' +stuname + '_local.pdf', function (err) {
+  res.download('/var/ftp/pub/' + id + '/' + stuid + '_' + stuname + '.pdf', 'D:/' + stuid + '_' + id + '_' + stuname + '_local.pdf', function (err) {
     if (err) {
       console.log('远程不存在或者本地文件丢失');
       console.log(new Date());
@@ -103,26 +103,27 @@ router.get('/dload', (req, res) => {
 
   })
 })
+//文件上传
 router.post('/file_upload', function (req, res) {
   console.log('进入了函数')
   console.log(req.files[0]);  // 上传的文件信息
   var tempfilename = req.files[0].originalname;
   var mysid = tempfilename.split("_")[0];//学号
   var myid = tempfilename.split("_")[1];//作业号
-  var myhid =  tempfilename.split("_")[2];//我的作业唯一标识
+  var myhid = tempfilename.split("_")[2];//我的作业唯一标识
   var myfile = tempfilename.split("_")[3];//剩余部分
   var myname = myfile.split(".")[0];//我的姓名
   var mylas = myfile.split(".")[1];//文件尾缀
 
   console.log('学号:' + mysid);
-  console.log('作业号: '+myid);
+  console.log('作业号: ' + myid);
   console.log('学生-作业唯一表示:' + myhid);
   console.log('学生姓名:' + myname);
   console.log('文件后缀:' + mylas);
   var des_file = "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".docx"; //文件名
-  var des_2 = "/var/ftp/pub/" + myid ;
+  var des_2 = "/var/ftp/pub/" + myid;
   console.log('目标地址: ' + des_file);
-  console.log('pdf地址:'+des_2);
+  console.log('pdf地址:' + des_2);
   fs.exists("/var/ftp/pub/" + myid, function (exists) {
     var my_cnt = "0";
     if (exists) {
@@ -133,10 +134,10 @@ router.post('/file_upload', function (req, res) {
           if (err) {
             console.log(err);
           } else {
-            console.log('libreoffice --headless --convert-to pdf '+des_file+' --outdir '+des_2)
-            cp.exec('libreoffice --headless --convert-to pdf '+des_file+' --outdir '+des_2,function(err,stdout,stderr){
-              if(err){
-                  console.error(err);
+            console.log('libreoffice --headless --convert-to pdf ' + des_file + ' --outdir ' + des_2)
+            cp.exec('libreoffice --headless --convert-to pdf ' + des_file + ' --outdir ' + des_2, function (err, stdout, stderr) {
+              if (err) {
+                console.error(err);
               }
               pdftk.input("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").stamp("/var/ftp/pub/watermark/w1.pdf").output("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").then(buffer => { return console.log('success'); }).catch(err => {
                 console.error(err);
@@ -151,28 +152,28 @@ router.post('/file_upload', function (req, res) {
                   console.error(err);
                 }
               });
-              fs.readFile('/var/ftp/pub/temp.txt','utf-8',function(err,data){
-                  if(err){
-                      console.error(err);
-                  }
-                  else{
-                      var re = /[\u4E00-\u9FA5]/g; 
-                      var my_cnt = data.match(re).length;
-                      console.log('共计:' + my_cnt);
-                          response = {
-                            message: 'File uploaded successfully',
-                            filename: req.files[0].originalname,
-                            count: my_cnt
-                          };
-                          SQLupdate(myhid, my_cnt);
-                          console.log(response);
-                          res.end(JSON.stringify(response));
-                  }
+              fs.readFile('/var/ftp/pub/temp.txt', 'utf-8', function (err, data) {
+                if (err) {
+                  console.error(err);
+                }
+                else {
+                  var re = /[\u4E00-\u9FA5]/g;
+                  var my_cnt = data.match(re).length;
+                  console.log('共计:' + my_cnt);
+                  response = {
+                    message: 'File uploaded successfully',
+                    filename: req.files[0].originalname,
+                    count: my_cnt
+                  };
+                  SQLupdate(myhid, my_cnt);
+                  console.log(response);
+                  res.end(JSON.stringify(response));
+                }
               });
-              
-  
-          });
-            
+
+
+            });
+
             // 文件上传成功，respones给客户端
 
           }
@@ -188,48 +189,60 @@ router.post('/file_upload', function (req, res) {
         }
         else {
           console.log('创建成功');
-          fs.readFile(req.files[0].path, function (err, data) {  // 异步读取文件内容
+          fs.readFile(req.files[0].path, function (err, data) { // 异步读取文件内容
+
             fs.writeFile(des_file, data, function (err) { // des_file是文件名，data，文件数据，异步写入到文件
               if (err) {
                 console.log(err);
               } else {
-                // 文件上传成功，respones给客户端
-                pdftk.input(des_file).stamp("/var/ftp/pub/watermark/w1.pdf").output(des_file).then(buffer => { return console.log('success'); }).catch(err => {
-                  console.error(err);
-                });
-                response = {
-                  message: 'File uploaded successfully',
-                  filename: req.files[0].originalname,
-                  count: my_cnt
-                };
-
-                cp.exec("pdftotext " + des_file + " /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
+                console.log('libreoffice --headless --convert-to pdf ' + des_file + ' --outdir ' + des_2)
+                cp.exec('libreoffice --headless --convert-to pdf ' + des_file + ' --outdir ' + des_2, function (err, stdout, stderr) {
                   if (err) {
                     console.error(err);
                   }
-                });
-
-                cp.exec("echo |wc -m /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
-                  if (err) {
+                  pdftk.input("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").stamp("/var/ftp/pub/watermark/w1.pdf").output("/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf").then(buffer => { return console.log('success'); }).catch(err => {
                     console.error(err);
-                  }
-                  my_cnt = stdout.trim().split(" ")[0];
-                  console.log('共计:' + my_cnt);
+                  });
                   response = {
                     message: 'File uploaded successfully',
                     filename: req.files[0].originalname,
                     count: my_cnt
                   };
-                  console.log(response);
-                  res.end(JSON.stringify(response));
+                  cp.exec("pdftotext " + "/var/ftp/pub/" + myid + "/" + mysid + "_" + myname + ".pdf" + " /var/ftp/pub/temp.txt", function (err, stdout, stderr) {
+                    if (err) {
+                      console.error(err);
+                    }
+                  });
+                  fs.readFile('/var/ftp/pub/temp.txt', 'utf-8', function (err, data) {
+                    if (err) {
+                      console.error(err);
+                    }
+                    else {
+                      var re = /[\u4E00-\u9FA5]/g;
+                      var my_cnt = data.match(re).length;
+                      console.log('共计:' + my_cnt);
+                      response = {
+                        message: 'File uploaded successfully',
+                        filename: req.files[0].originalname,
+                        count: my_cnt
+                      };
+                      SQLupdate(myhid, my_cnt);
+                      console.log(response);
+                      res.end(JSON.stringify(response));
+                    }
+                  });
+
+
                 });
+
+                // 文件上传成功，respones给客户端
+
               }
 
-            })
+              //                 console.log( response );
+              //                 res.end( JSON.stringify( response ) );
+            });
           });
-          //                     console.log( response );
-          //                     res.end( JSON.stringify( response ) );
-
         };
 
       });
