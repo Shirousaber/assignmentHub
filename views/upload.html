@@ -17,6 +17,8 @@
   <body>
 	  <!-- 顶部 -->
         <form action="/connect/file_upload" method="post" enctype="multipart/form-data">
+	    <text style="display:block">请将文件命名为:</text>
+	    <text style="display:block"><%=my_file_name%></text>
             <input type="file" name="file" id="">
             <br />
             <input type="submit" value="上传文件" />
