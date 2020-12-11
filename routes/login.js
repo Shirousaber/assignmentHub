@@ -238,7 +238,7 @@ router.get('/stulogin',function(req,res){
                     conn.release();
                     })
                 }
-                var sql = "select date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline, tid, cname, hid, cid from class where sid = '"+curruser+"'";
+                var sql = "select date_format(deadline,'%Y-%m-%d %H:%i:%s') as deadline, tid, cname, hid, cid,name  from class left join suser on class.sid=suser.stid where sid = '"+curruser+"'";
                 var sqlArr = [];
                 var callBack = (err, data)=>{
                     if(err){
@@ -251,7 +251,8 @@ router.get('/stulogin',function(req,res){
                       res.render('index', { 
                           title: 'express&mysql测试',
                           data:data ,
-                          user:curruser
+                          user:curruser,
+                          my_stuid:name
                         });
                         
                     }
